@@ -8,14 +8,13 @@ namespace GamingDashboard
 {
 
     // Quick explaination of the SQL database 
-    // the steamFavourites and newsFavourite tables will be carbon copies of their non favourite counter part. 
-    // in doing so a user can save a favourite forever in the database even if that steam sale item dissapears from the API at some point. 
+    // the steamFavourites and newsFavourite tables will be carbon copies of the API call, but with an attached userID. 
 
     // but for the sake of simplicity the Favourite Lists in C# and the Article/Sales Lists in C# will both utalize the same class. 
     // no need for a FavSteamSale class. etc. 
 
     // All interface methods should be implimented right here on DataBase and most of them should query the SQL lite database. 
-    public class Database : IUserManager, ISteamSaleManager, INewsManager, IFavoritesManager
+    public class Database : IUserManager, IEpicSaleManager, INewsManager, IFavoritesManager
     {
         public User LogedInUser { get; set; } //after login in / logging out change this user value, will be tracked on all forms.
         public List<User> Users { get; set; }
@@ -60,17 +59,17 @@ namespace GamingDashboard
         {
         }
 
-        public List<EpicSpecial> GetSteamSales()
+        public List<EpicSpecial> GetEpicSales()
         {
             return new List<EpicSpecial>(); 
         }
 
-        public List<EpicSpecial> SearchSteamSales(string keyword)
+        public List<EpicSpecial> SearchEpicSales(string keyword)
         {
             return new List<EpicSpecial>(); 
         }
 
-        public List<EpicSpecial> FilterSteamSalesByCategory(string category)
+        public List<EpicSpecial> FilterEpicSalesByCategory(string category)
         {
             return new List<EpicSpecial>(); 
         }
