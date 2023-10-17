@@ -1,0 +1,4 @@
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.Properties.Resources.resources
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.csproj.CoreCompileInputs.cache
