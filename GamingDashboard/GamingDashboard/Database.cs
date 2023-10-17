@@ -20,9 +20,9 @@ namespace GamingDashboard
         public User LogedInUser { get; set; } //after login in / logging out change this user value, will be tracked on all forms.
         public List<User> Users { get; set; }
         public List<News> NewsArticles { get; set; }
-        public List<SteamSpecial> SteamSales { get; set; }
+        public List<EpicSpecial> SteamSales { get; set; }
         public List<News> FavouriteNews { get; set; } // Use these dynamically such that the methods from the interface directly alter these lists. Or dont ¯\_(ツ)_/¯
-        public List<SteamSpecial> FavouriteSales { get; set; }
+        public List<EpicSpecial> FavouriteSales { get; set; }
 
         // The database class will be the only location where API calls and SQL queries will take palce. Feel free to create sub classes if you dont like everything all in one place. 
 
@@ -60,19 +60,19 @@ namespace GamingDashboard
         {
         }
 
-        public List<SteamSpecial> GetSteamSales()
+        public List<EpicSpecial> GetSteamSales()
         {
-            return new List<SteamSpecial>(); 
+            return new List<EpicSpecial>(); 
         }
 
-        public List<SteamSpecial> SearchSteamSales(string keyword)
+        public List<EpicSpecial> SearchSteamSales(string keyword)
         {
-            return new List<SteamSpecial>(); 
+            return new List<EpicSpecial>(); 
         }
 
-        public List<SteamSpecial> FilterSteamSalesByCategory(string category)
+        public List<EpicSpecial> FilterSteamSalesByCategory(string category)
         {
-            return new List<SteamSpecial>(); 
+            return new List<EpicSpecial>(); 
         }
 
 
@@ -122,9 +122,9 @@ namespace GamingDashboard
         {
         }
 
-        public List<SteamSpecial> GetSteamSaleFavorites(int userId)
+        public List<EpicSpecial> GetSteamSaleFavorites(int userId)
         {
-            return new List<SteamSpecial>(); 
+            return new List<EpicSpecial>(); 
         }
 
     }
