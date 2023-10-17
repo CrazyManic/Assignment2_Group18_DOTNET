@@ -17,6 +17,7 @@ namespace GamingDashboard
     // All interface methods should be implimented right here on DataBase and most of them should query the SQL lite database. 
     public class Database : IUserManager, ISteamSaleManager, INewsManager, IFavoritesManager
     {
+        public User LogedInUser { get; set; } //after login in / logging out change this user value, will be tracked on all forms.
         public List<User> Users { get; set; }
         public List<News> NewsArticles { get; set; }
         public List<SteamSpecial> SteamSales { get; set; }
