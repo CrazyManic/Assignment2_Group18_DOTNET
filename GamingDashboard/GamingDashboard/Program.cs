@@ -8,6 +8,7 @@ namespace GamingDashboard
 {
     static class Program
     {
+
         /// <summary>
         /// The main entry point for the application.
         /// 
@@ -20,10 +21,15 @@ namespace GamingDashboard
         /// 
         /// All form handling will take place here in the Program class. 
         /// 
+        /// 
         /// </summary>
         [STAThread]
+       
         static void Main()
         {
+            //Build the database if !exists 
+            DataBaseBuilder.Initialize();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
