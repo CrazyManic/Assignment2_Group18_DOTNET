@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 
 namespace GamingDashboard
 {
+    //Required from "Manage NuGet Package" Sqlite, NewtonSoft.JSON
 
     // Quick explaination of the SQL database 
     // the steamFavourites and newsFavourite tables will be carbon copies of the API call, but with an attached userID. 
