@@ -9,6 +9,8 @@ namespace GamingDashboard
     static class Program
     {
 
+        public static Database db = new Database();  // the whole program method list will be accessible from db.
+
         /// <summary>
         /// The main entry point for the application.
         /// 
@@ -24,11 +26,21 @@ namespace GamingDashboard
         /// 
         /// </summary>
         [STAThread]
+
        
-        static void Main()
+        public static async Task Main()
         {
             //Build the database if !exists 
             DataBaseBuilder.Initialize();
+
+
+            //Little test for EpicSales 
+            List<EpicSpecial> epicSales = await db.GetEpicSales();
+            foreach (var epicSpecial in epicSales)
+            {
+                Console.WriteLine(epicSpecial.ToString());
+            }
+
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

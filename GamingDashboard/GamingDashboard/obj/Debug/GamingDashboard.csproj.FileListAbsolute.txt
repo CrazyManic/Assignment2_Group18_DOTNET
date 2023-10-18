@@ -17,3 +17,5 @@ C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard
 C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.csproj.CopyComplete
 C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.exe
 C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.pdb
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\bin\Debug\Newtonsoft.Json.dll
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\bin\Debug\Newtonsoft.Json.xml

@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Net.Http.Headers;
+using System.Net.Http;
+
+using Newtonsoft.Json;
+
 namespace GamingDashboard
 {
 
@@ -22,6 +27,11 @@ namespace GamingDashboard
         public List<EpicSpecial> SteamSales { get; set; }
         public List<News> FavouriteNews { get; set; } // Use these dynamically such that the methods from the interface directly alter these lists. Or dont ¯\_(ツ)_/¯
         public List<EpicSpecial> FavouriteSales { get; set; }
+
+        //EPIC api constant's
+        private const string EpicApiBaseUrl = "https://epic-store-games.p.rapidapi.com/onSale";
+        private const string RapidApiKey = "4e3ce5bc43mshb49cfacf0855d76p10cf24jsn1ddf30e8ccbd";
+        private const string EpicRapidApiHost = "epic-store-games.p.rapidapi.com";
 
         // The database class will be the only location where API calls and SQL queries will take palce. Feel free to create sub classes if you dont like everything all in one place. 
 
@@ -59,9 +69,39 @@ namespace GamingDashboard
         {
         }
 
-        public List<EpicSpecial> GetEpicSales()
+
+
+
+        public async Task<List<EpicSpecial>> GetEpicSales()
         {
-            return new List<EpicSpecial>(); 
+            //All required API inputs as declared by rapidAPI
+            string locale = "us";
+            string country = "us";
+            string categories = "Games";
+            string searchWords = "  ";
+
+            using (var client = new HttpClient())
+            {
+                var requestUri = new Uri($"{EpicApiBaseUrl}?searchWords={searchWords}&locale={locale}&country={country}&categories={categories}"); //The API call string gets built
+
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,   //The request is declared
+                    RequestUri = requestUri
+                };
+
+                request.Headers.Add("X-RapidAPI-Key", RapidApiKey);  //the request headers are attached, these are required by rapid API. 
+                request.Headers.Add("X-RapidAPI-Host", EpicRapidApiHost);
+
+                using (var response = await client.SendAsync(request))  //Generic C# http async request method.
+                {
+                    response.EnsureSuccessStatusCode();
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    List<EpicSpecial> epicSpecials = JsonConvert.DeserializeObject<List<EpicSpecial>>(responseContent); //This JSON Conversion method requires your Model Class to exactly represent the response JSON from the api. 
+                    return epicSpecials;  //returnm the api call
+                }
+            }
+
         }
 
         public List<EpicSpecial> SearchEpicSales(string keyword)

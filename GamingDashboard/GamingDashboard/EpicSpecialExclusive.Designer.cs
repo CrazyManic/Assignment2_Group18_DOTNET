@@ -1,7 +1,7 @@
 ﻿
 namespace GamingDashboard
 {
-    partial class SteamSpecialExclusive
+    partial class EpicSpecialExclusive
     {
         /// <summary>
         /// Required designer variable.

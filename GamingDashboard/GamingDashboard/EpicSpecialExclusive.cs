@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GamingDashboard
 {
-    public partial class SteamSpecialExclusive : Form
+    public partial class EpicSpecialExclusive : Form
     {
-        public SteamSpecialExclusive()
+        public EpicSpecialExclusive()
         {
             InitializeComponent();
         }

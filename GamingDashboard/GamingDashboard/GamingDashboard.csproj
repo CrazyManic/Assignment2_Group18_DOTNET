@@ -42,6 +42,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -93,8 +96,8 @@
     </Compile>
     <Compile Include="IFavouritesManager.cs" />
     <Compile Include="INewsManager.cs" />
-    <Compile Include="ISteamSaleManager.cs" />
-    <Compile Include="SteamSpecial.cs" />
+    <Compile Include="IEpicSaleManager.cs" />
+    <Compile Include="EpicSpecial.cs" />
     <Compile Include="News.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -105,11 +108,11 @@
     <Compile Include="IUserManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SteamSpecialExclusive.cs">
+    <Compile Include="EpicSpecialExclusive.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SteamSpecialExclusive.Designer.cs">
-      <DependentUpon>SteamSpecialExclusive.cs</DependentUpon>
+    <Compile Include="EpicSpecialExclusive.Designer.cs">
+      <DependentUpon>EpicSpecialExclusive.cs</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="UserManagementDashboard.cs">
