@@ -40,7 +40,12 @@ namespace GamingDashboard
             {
                 Console.WriteLine(epicSpecial.ToString());
             }
-
+            //Little test for epicUpcoming
+            List<EpicSpecial> epicUpcoming = await db.GetUpComingGames( null, null);
+            foreach(var epic in epicUpcoming)
+            {
+                Console.WriteLine(epic.Description + "  " + epic.Title);
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

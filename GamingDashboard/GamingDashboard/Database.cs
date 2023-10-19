@@ -31,6 +31,7 @@ namespace GamingDashboard
 
         //EPIC api constant's
         private const string EpicApiBaseUrl = "https://epic-store-games.p.rapidapi.com/onSale";
+        private const string EpicApiUpcomingUrl = "https://epic-store-games.p.rapidapi.com/comingSoon";
         private const string RapidApiKey = "4e3ce5bc43mshb49cfacf0855d76p10cf24jsn1ddf30e8ccbd";
         private const string EpicRapidApiHost = "epic-store-games.p.rapidapi.com";
 
@@ -65,13 +66,7 @@ namespace GamingDashboard
 
 
         //////////////////////////////////////////////////////////////////////////////////////
-        ////   STEAMSPECIAL MANAGEMENT implimentation
-        public void ReFreshSteamSpecialDatabase()
-        {
-        }
-
-
-
+        ////   EpicSPECIAL MANAGEMENT implimentation
 
         public async Task<List<EpicSpecial>> GetEpicSales()
         {
@@ -105,9 +100,78 @@ namespace GamingDashboard
 
         }
 
-        public List<EpicSpecial> SearchEpicSales(string keyword)
+        //Given a key search word and categories the search epic sales will contact the api with an updated URI requesting new filtered data.
+        public async Task<List<EpicSpecial>> SearchEpicSales(string searchWords, string categories)
         {
-            return new List<EpicSpecial>(); 
+            string locale = "us";
+            string country = "us";
+            if(searchWords.Length == 0)
+            {
+                searchWords = " "; //the api seems to reply with the top list of elements if a space is parsed as the search word. null entry will respond with 404. 
+            }
+            if(categories.Length == 0)
+            {
+                categories = "Games"; //default back to games.
+            }
+
+            using (var client = new HttpClient())
+            {
+                var requestUri = new Uri($"{EpicApiBaseUrl}?searchWords={searchWords}&locale={locale}&country={country}&categories={categories}"); //The API call string gets built
+
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,   //The request is declared
+                    RequestUri = requestUri
+                };
+
+                request.Headers.Add("X-RapidAPI-Key", RapidApiKey);  //the request headers are attached, these are required by rapid API. 
+                request.Headers.Add("X-RapidAPI-Host", EpicRapidApiHost);
+
+                using (var response = await client.SendAsync(request))  //Generic C# http async request method.
+                {
+                    response.EnsureSuccessStatusCode();
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    List<EpicSpecial> epicSpecials = JsonConvert.DeserializeObject<List<EpicSpecial>>(responseContent); //This JSON Conversion method requires your Model Class to exactly represent the response JSON from the api. 
+                    return epicSpecials;  //returnm the api call
+                }
+            }
+        }
+
+        public async Task<List<EpicSpecial>> GetUpComingGames(string searchWords, string categories)
+        {
+            string locale = "us";
+            string country = "us";
+
+            if(searchWords == null)
+            {
+                searchWords = " "; //the api seems to reply with the top list of elements if a space is parsed as the search word. null entry will respond with 404. 
+            }
+            if ( categories == null)
+            {
+                categories = "Games"; //default back to games.
+            }
+
+            using (var client = new HttpClient())
+            {
+                var requestUri = new Uri($"{EpicApiUpcomingUrl}?searchWords={searchWords}&locale={locale}&country={country}&categories={categories}");
+
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,   //The request is declared
+                    RequestUri = requestUri
+                };
+                request.Headers.Add("X-RapidAPI-Key", RapidApiKey);  //the request headers are attached, these are required by rapid API. 
+                request.Headers.Add("X-RapidAPI-Host", EpicRapidApiHost);
+
+                using( var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    List<EpicSpecial> epicUpcoming = JsonConvert.DeserializeObject<List<EpicSpecial>>(responseContent);
+                    return epicUpcoming;
+                }
+            }
+
         }
 
         public List<EpicSpecial> FilterEpicSalesByCategory(string category)

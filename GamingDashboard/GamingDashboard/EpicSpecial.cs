@@ -20,9 +20,9 @@ namespace GamingDashboard
         public string Url { get; set; }
         public List<Category> Categories { get; set; }
         public Price Price { get; set; }
-        public DateTime? PrePurchase { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public DateTime PcReleaseDate { get; set; }
+        public Boolean? PrePurchase { get; set; }
+        public DateTime? ReleaseDate { get; set; }
+        public DateTime? PcReleaseDate { get; set; }
         public DateTime? ViewableDate { get; set; }
         public ApproximateReleasePlan ApproximateReleasePlan { get; set; }
         public string PublisherName { get; set; }
