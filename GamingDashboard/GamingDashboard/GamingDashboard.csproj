@@ -121,6 +121,9 @@
     <Compile Include="UserManagementDashboard.Designer.cs">
       <DependentUpon>UserManagementDashboard.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EpicSpecialExclusive.resx">
+      <DependentUpon>EpicSpecialExclusive.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -129,6 +132,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UserManagementDashboard.resx">
       <DependentUpon>UserManagementDashboard.cs</DependentUpon>
@@ -146,6 +150,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Space BG image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pattern.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cool-background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cool-background1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

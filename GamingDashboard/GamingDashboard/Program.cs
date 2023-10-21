@@ -35,21 +35,14 @@ namespace GamingDashboard
 
 
             //Little test for EpicSales 
-            List<EpicSpecial> epicSales = await db.GetEpicSales();
-            foreach (var epicSpecial in epicSales)
-            {
-                Console.WriteLine(epicSpecial.ToString());
-            }
-            //Little test for epicUpcoming
-            List<EpicSpecial> epicUpcoming = await db.GetUpComingGames( null, null);
-            foreach(var epic in epicUpcoming)
-            {
-                Console.WriteLine(epic.Description + "  " + epic.Title);
-            }
+
+         
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            //Application.Run(new Login());
+
+            Application.Run(new EpicSpecialExclusive(db));
         }
         
         // Handle login
