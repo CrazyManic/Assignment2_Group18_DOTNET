@@ -12,8 +12,10 @@ namespace GamingDashboard
 {
     public partial class NewsExclusive : Form
     {
-        public NewsExclusive()
+        private Database db;
+        public NewsExclusive(Database db)
         {
+            this.db = db;
             InitializeComponent();
         }
     }

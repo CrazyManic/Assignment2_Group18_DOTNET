@@ -177,6 +177,14 @@ namespace GamingDashboard
         {
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //Need a form manager class to manage all forms. Coming soon.
+            NewsExclusive newsExclusiveForm = new NewsExclusive(db);
+            //this.Close();
+            newsExclusiveForm.Show(new NewsExclusive(db));
+        }
     }
 
     //Helper class to better display what i need
