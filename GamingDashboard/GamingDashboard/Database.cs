@@ -35,6 +35,12 @@ namespace GamingDashboard
         private const string RapidApiKey = "4e3ce5bc43mshb49cfacf0855d76p10cf24jsn1ddf30e8ccbd";
         private const string EpicRapidApiHost = "epic-store-games.p.rapidapi.com";
 
+        //IGN api constant's 
+        private const string IGNApiBaseUrl = "https://ign-reviews.p.rapidapi.com/game-review/list";
+        private const string IGNApiKey = "677cb7e77fmshe8a11fe1bc970e2p19ed36jsn9cfd3ce7a575";
+        private const string IGNRapidApiHost = "ign-reviews.p.rapidapi.com";
+
+
         // The database class will be the only location where API calls and SQL queries will take palce. Feel free to create sub classes if you dont like everything all in one place. 
 
         //////////////////////////////////////////////////////////////////////////////////////
@@ -178,6 +184,12 @@ namespace GamingDashboard
         {
             return new List<EpicSpecial>(); 
         }
+
+
+        //////////////////////////////////////////////////////////////////////////////////////
+        ////   IGN MANAGEMENT implimentation
+
+        
 
 
         //////////////////////////////////////////////////////////////////////////////////////
