@@ -12,22 +12,22 @@ using System.Net;
 
 namespace GamingDashboard
 {
-    
-    public partial class EpicSpecialExclusive : Form
+
+    public partial class IGNReviewExclusive : Form
     {
         private Database db;
         public int imageScale = 168; //the size of the view port for images
         public int imageScaleFactor = 14; //resizes the images from the api call.
-        public string searchBar = ""; //api call for searchwords
-        public string category = ""; //API call for category
+        public string platform = ""; //api call for searchwords
+        public string sortBY = ""; //API call for category
         private Button current = null; //Tracks the current category button to make it blue.
-        public EpicSpecialExclusive(Database db)
+        public IGNReviewExclusive(Database db)
         {
             InitializeComponent();
             this.db = db;
         }
 
-        private async void EpicSpecialExclusive_Load(object sender, EventArgs e)
+        private async void IGNReviewExclusive_Load(object sender, EventArgs e)
         {
             setButtons();
             if (current != null)
@@ -35,53 +35,54 @@ namespace GamingDashboard
                 current.BackColor = Color.Blue;
             }
 
-            List<EpicSpecial> epicSpecials = await db.SearchEpicSales(searchBar, category);
+            List<IGNReview> iGNReviews = await db.SearchIGNReview(platform, sortBY);
 
-            List<epicDisplayHelper> gridView = epicSpecials.Select(epicSpecial => new epicDisplayHelper
+            List<IGNDisplayHelper> gridView = iGNReviews.Select(iGNReview => new IGNDisplayHelper
             {
-                Title = epicSpecial.Title,
-                Price = priceFormatter( epicSpecial.CurrentPrice),
+                Name = iGNReview.Name,
+                Score = scoreSettler(iGNReview.minScore, iGNReview.maxScore) 
             }).ToList();
 
-            foreach (EpicSpecial epic in epicSpecials)
+            foreach (IGNReview ignreview in iGNReviews)
             {
-                Console.WriteLine(epic.Title);
+                Console.WriteLine(Name = ignreview.Name);
             }
 
-            dataGridView1.Columns.Clear();
-            dataGridView1.DataSource = null;
+            dataGridView2.Columns.Clear();
+            dataGridView2.DataSource = null;
 
-            dataGridView1.DataSource = gridView;
+            dataGridView2.DataSource = gridView;
 
-            Load_Images(epicSpecials);
+            Load_Images(iGNReviews);
 
             DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
             imageColumn.Name = "ImageColumn";
 
             imageColumn.Name = "ImageColumn";
             imageColumn.Width = 128; // Set the width for the desired aspect ratio
-            dataGridView1.Columns.Add(imageColumn);
-            dataGridView1.Columns[0].Width = 400;
-            dataGridView1.Columns[2].Width = imageScale;
+            dataGridView2.Columns.Add(imageColumn);
+            dataGridView2.Columns[0].Width = 400;
+            dataGridView2.Columns[2].Width = imageScale;
 
             // Adjust row height to 128 pixels
 
             //Asynchronous call for images from the API, can be a little slow but atleast it does not crash the application untill complete
 
-            dataGridView1.Refresh();
+            dataGridView2.Refresh();
 
         }
 
-        private async void Load_Images(List<EpicSpecial> epics)
+        private async void Load_Images(List<IGNReview> ign)
         {
-            for (int i = 0; i < epics.Count; i++)
+            for (int i = 0; i < ign.Count; i++)
             {
                 DataGridViewImageCell imageCell = new DataGridViewImageCell();
                 try
                 {
                     using (WebClient wc = new WebClient())
                     {
-                        byte[] imageBytes = await wc.DownloadDataTaskAsync(epics[i].KeyImages[0].Url); //Downloads the image to garvage collection
+                        byte[] imageBytes = await wc.DownloadDataTaskAsync(ign[i].Image); //NEED TO FIX THIS!!!!!!!!!!!!!!!
+
                         using (MemoryStream ms = new MemoryStream(imageBytes))                   //Loads the image to the memory
                         {
                             Image image = Image.FromStream(ms);
@@ -95,12 +96,13 @@ namespace GamingDashboard
                 {
                     Console.WriteLine("Image caused a big yikes." + ex.Message);
                 }
-                
+
 
                 try
                 {
-                    dataGridView1.Rows[i].Cells["ImageColumn"] = imageCell;
-                } catch (Exception ex)
+                    dataGridView2.Rows[i].Cells["ImageColumn"] = imageCell;
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     break;
@@ -110,58 +112,49 @@ namespace GamingDashboard
 
         }
 
-        private string priceFormatter(decimal currentPrice)
+        private string scoreSettler(double minScore, double maxScore)
         {
-            if(currentPrice == 0)
-            {
-                return "Free!";
-            } else
-            {
-                return "$" + Convert.ToString(currentPrice/100);
-            }
+            double currentScore = (minScore + maxScore) / 2;
+            return currentScore.ToString();
+            
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            //Need to fix this
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
+            //Need to fix this
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            searchBar = textBox1.Text;
-            current = button1;
-            EpicSpecialExclusive_Load(sender, e);
+            //Need to fix this
+            IGNReviewExclusive_Load(sender, e);
 
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            category = "Games";
-            current = button2;
-            EpicSpecialExclusive_Load(sender, e);
+            //Need to fix this
+            IGNReviewExclusive_Load(sender, e);
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            category = "Apps";
-            current = button3;
-            EpicSpecialExclusive_Load(sender, e);
+            //Need to fix this
+            IGNReviewExclusive_Load(sender, e);
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            category = "GameAddOn";
-            current = button4;
-            EpicSpecialExclusive_Load(sender, e);
+            //Need to fix this
+            IGNReviewExclusive_Load(sender, e);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            category = "GameDemo";
-            current = button6;
-            EpicSpecialExclusive_Load(sender, e);
+            //Need to fix this
+            IGNReviewExclusive_Load(sender, e);
         }
         private void setButtons()
         {
@@ -188,10 +181,12 @@ namespace GamingDashboard
     }
 
     //Helper class to better display what i need
-    public class epicDisplayHelper
+    public class IGNDisplayHelper
     {
-        public string Title { get; set; }
-        public string Price { get; set; }
+        public string Name { get; set; }
+        public string minScore { get; set; }
+        public string maxScore { get; set; }
+        public string Score { get; set; }
 
     }
 }

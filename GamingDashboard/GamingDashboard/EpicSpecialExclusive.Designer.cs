@@ -207,3 +207,4 @@ namespace GamingDashboard
         private System.Windows.Forms.Button button5;
     }
 }
+

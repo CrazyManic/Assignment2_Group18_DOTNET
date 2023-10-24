@@ -82,11 +82,13 @@
     <Compile Include="FavouriteManagementDashboard.Designer.cs">
       <DependentUpon>FavouriteManagementDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewsExclusive.cs">
+    <Compile Include="IGNReview.cs" />
+    <Compile Include="IIGNReviewManager.cs" />
+    <Compile Include="IGNReviewExclusive.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewsExclusive.Designer.cs">
-      <DependentUpon>NewsExclusive.cs</DependentUpon>
+    <Compile Include="IGNReviewExclusive.Designer.cs">
+      <DependentUpon>IGNReviewExclusive.cs</DependentUpon>
     </Compile>
     <Compile Include="SignUp.cs">
       <SubType>Form</SubType>
