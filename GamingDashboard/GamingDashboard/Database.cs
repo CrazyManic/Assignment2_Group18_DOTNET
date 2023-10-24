@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 
 using Newtonsoft.Json;
+using System.Data.SQLite;
 
 namespace GamingDashboard
 {
@@ -22,6 +23,9 @@ namespace GamingDashboard
     // All interface methods should be implimented right here on DataBase and most of them should query the SQL lite database. 
     public class Database : IUserManager, IEpicSaleManager, INewsManager, IFavoritesManager
     {
+        // data source
+        private static string connectionString = "Data Source=../../../DashBoardDB.db;";
+
         public User LogedInUser { get; set; } //after login in / logging out change this user value, will be tracked on all forms.
         public List<User> Users { get; set; }
         public List<News> NewsArticles { get; set; }
@@ -46,17 +50,123 @@ namespace GamingDashboard
 
         public User CreateUser(string username, string password, string email, string FirstName, string LastName)
         {
-            return new User(); // Placeholder return
+            User user = new User();
+            using(var connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string checkUserName = "SELECT * FROM Users where Username = @username";
+
+                using (SQLiteCommand command = new SQLiteCommand(checkUserName, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                     using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return null;
+                        }
+
+                    }  
+                }
+
+                // if there is no username present procced
+                string insertUser = "INSERT INTO Users(username, password,email, firstName, lastName) VALUES (@username, @password, @email, @firstName, @lastName) ";
+
+                using(SQLiteCommand command = new SQLiteCommand(insertUser, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@password", password);
+                    command.Parameters.AddWithValue("@email", email);
+                    command.Parameters.AddWithValue("@firstName", FirstName);
+                    command.Parameters.AddWithValue("@lastName", LastName);
+
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        // User creation successful; return true.
+                        user = GetUserByUsername(username);
+                        
+                    }
+                }
+            }
+            return user;
+            
         }
 
         public User GetUserById(int userId)
         {
-            return new User(); // Placeholder return
+            return null; // Placeholder return
+        }
+        public User GetUserByUsername(string username)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string query = "select * from users where username = @username";
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                   
+
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            // return a user object instead of true or false
+                            User user = new User
+                            {
+                                //UserId = int.Parse(reader["UserId"].ToString()), // Assuming UserId is an int
+
+                                UserFirstName = reader["FirstName"].ToString(),
+                                UserLastName = reader["LastName"].ToString(),
+                                UserEmail = reader["Email"].ToString(),
+                                Username = reader["Username"].ToString(),
+                                Password = reader["password"].ToString()
+                            };
+                            return user;
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         public User Login(string username, string password)
         {
-            return new User(); // Placeholder return
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string query = "select * from users where username = @username AND Password = @password";
+                using(SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@password", password);
+
+                    using(SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            // return a user object instead of true or false
+                            User user = new User
+                            {
+                                //UserId = int.Parse(reader["UserId"].ToString()), // Assuming UserId is an int
+                   
+                                UserFirstName = reader["FirstName"].ToString(),
+                                UserLastName = reader["LastName"].ToString(),
+                                UserEmail = reader["Email"].ToString(),
+                                Username = reader["Username"].ToString(),
+                                Password = reader["password"].ToString()
+                            };
+                            return user;
+                        }
+                    }
+                }
+            }
+            return null;
+
         }
 
         public void Update(string username, string password, string email, string FirstName, string LastName)

@@ -42,7 +42,8 @@ namespace GamingDashboard
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login());
 
-            Application.Run(new EpicSpecialExclusive(db));
+            // Application.Run(new EpicSpecialExclusive(db));
+            Application.Run(new Login());
         }
         
         // Handle login
