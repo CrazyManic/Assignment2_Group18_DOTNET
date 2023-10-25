@@ -12,10 +12,11 @@ namespace GamingDashboard
 {
     public partial class SignUp : Form
     {
-        Database database = new Database();
+        private Database database;
         Validation validate = new Validation();
-        public SignUp()
+        public SignUp(Database database)
         {
+            this.database = database;
             InitializeComponent();
         }
 
@@ -69,7 +70,7 @@ namespace GamingDashboard
                 usernameInput.Text = "";
                 passwordInput.Text = "";
 
-                Login login = new Login();
+                Login login = new Login(database);
                 this.Hide();
                 login.Show();
             }

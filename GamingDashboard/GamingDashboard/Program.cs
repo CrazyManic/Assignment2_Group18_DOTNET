@@ -42,8 +42,9 @@ namespace GamingDashboard
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login());
 
+            // all forms need to reference the database object created in main.
             // Application.Run(new EpicSpecialExclusive(db));
-            Application.Run(new Login());
+            Application.Run(new Login(db));
         }
         
         // Handle login

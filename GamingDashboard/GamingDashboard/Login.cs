@@ -12,10 +12,11 @@ namespace GamingDashboard
 {
     public partial class Login : Form
     {
-         Database database = new Database();
+        private Database database;
 
-        public Login()
+        public Login(Database database)
         {
+            this.database = database;
             InitializeComponent();
             
         }
@@ -50,6 +51,10 @@ namespace GamingDashboard
                     MessageBox.Show("Login succesfully Welcom " + user.UserFirstName + " " + user.UserLastName);
                     txtUsername.Text = "";
                     txtPassword.Text = "";
+                    database.LogedInUser = user; //Set the user in the database
+                    EpicSpecialExclusive mainPage = new EpicSpecialExclusive(database);//Generate a new main page // this page is place holder for now.
+                    mainPage.Show();//show the new mainpage
+                    this.Hide(); //hide this page
                 }
                 else
                 {
@@ -73,7 +78,7 @@ namespace GamingDashboard
 
         private void signupBtn_Click(object sender, EventArgs e)
         {
-            SignUp signup = new SignUp();
+            SignUp signup = new SignUp(this.database);
             this.Hide();
             signup.Show();
             //this.Close();
