@@ -87,7 +87,9 @@ namespace GamingDashboard
 
         }
 
+        private void SignUp_Load(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

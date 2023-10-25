@@ -152,8 +152,8 @@ namespace GamingDashboard
                             // return a user object instead of true or false
                             User user = new User
                             {
-                                //UserId = int.Parse(reader["UserId"].ToString()), // Assuming UserId is an int
-                   
+                               UserId = int.Parse(reader["UserId"].ToString()), // Assuming UserId is an int
+                                
                                 UserFirstName = reader["FirstName"].ToString(),
                                 UserLastName = reader["LastName"].ToString(),
                                 UserEmail = reader["Email"].ToString(),
@@ -169,9 +169,54 @@ namespace GamingDashboard
 
         }
 
-        public void Update(string username, string password, string email, string FirstName, string LastName)
+        public string Update(int userId, string username, string password, string email, string FirstName, string LastName)
         {
+            
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string checkUserName = "SELECT * FROM Users WHERE Username = @username AND userId != @userId";
 
+                using (SQLiteCommand checkCommand = new SQLiteCommand(checkUserName, connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@username", username);
+                    checkCommand.Parameters.AddWithValue("@userId", userId);
+
+                    using (SQLiteDataReader reader = checkCommand.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            
+                            return "Sorry! Username is already in use by another user!"; // Username is already in use by another user.
+                        }
+                    }
+                }
+
+                string updateUser = "UPDATE Users SET Username = @username, Password = @password, Email = @email, FirstName = @firstName, LastName = @lastName WHERE userId = @userId";
+
+                using (SQLiteCommand updateCommand = new SQLiteCommand(updateUser, connection))
+                {
+                    updateCommand.Parameters.AddWithValue("@username", username);
+                    updateCommand.Parameters.AddWithValue("@password", password);
+                    updateCommand.Parameters.AddWithValue("@email", email);
+                    updateCommand.Parameters.AddWithValue("@firstName", FirstName);
+                    updateCommand.Parameters.AddWithValue("@lastName", LastName);
+                    updateCommand.Parameters.AddWithValue("@userId", userId);
+
+                    int rowsAffected = updateCommand.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                       return "User information updated successfully" ; // User information updated successfully.
+                    }
+                    else
+                    {
+                        return "Couldn't update user details!";
+
+                    }
+                }
+            }
+
+          
         }
 
 

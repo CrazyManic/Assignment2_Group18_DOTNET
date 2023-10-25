@@ -48,13 +48,22 @@ namespace GamingDashboard
                 User user = database.Login(username, password);
                 if (user != null)
                 {
-                    MessageBox.Show("Login succesfully Welcom " + user.UserFirstName + " " + user.UserLastName);
+                    MessageBox.Show("Login succesfully Welcome " + user.UserFirstName + " " + user.UserLastName);
                     txtUsername.Text = "";
                     txtPassword.Text = "";
+
                     database.LogedInUser = user; //Set the user in the database
+
+                    UserManagementDashboard userManager = new UserManagementDashboard(database);
+                    userManager.Show();
+                    this.Hide();
+
+                    /* comment it for a while
                     EpicSpecialExclusive mainPage = new EpicSpecialExclusive(database);//Generate a new main page // this page is place holder for now.
                     mainPage.Show();//show the new mainpage
                     this.Hide(); //hide this page
+
+                    */
                 }
                 else
                 {
