@@ -121,6 +121,7 @@
     <Compile Include="UserManagementDashboard.Designer.cs">
       <DependentUpon>UserManagementDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Validation.cs" />
     <EmbeddedResource Include="EpicSpecialExclusive.resx">
       <DependentUpon>EpicSpecialExclusive.cs</DependentUpon>
     </EmbeddedResource>
