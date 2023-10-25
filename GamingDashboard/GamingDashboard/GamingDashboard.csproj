@@ -126,6 +126,9 @@
     <EmbeddedResource Include="EpicSpecialExclusive.resx">
       <DependentUpon>EpicSpecialExclusive.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IGNReviewExclusive.resx">
+      <DependentUpon>IGNReviewExclusive.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

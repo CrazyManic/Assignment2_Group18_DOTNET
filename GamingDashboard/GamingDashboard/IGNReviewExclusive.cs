@@ -18,8 +18,8 @@ namespace GamingDashboard
         private Database db;
         public int imageScale = 168; //the size of the view port for images
         public int imageScaleFactor = 14; //resizes the images from the api call.
-        public string platform = ""; //api call for searchwords
-        public string sortBY = ""; //API call for category
+        public string qurry = " ";
+        public string platform = " ";
         private Button current = null; //Tracks the current category button to make it blue.
         public IGNReviewExclusive(Database db)
         {
@@ -27,7 +27,7 @@ namespace GamingDashboard
             this.db = db;
         }
 
-        private async void IGNReviewExclusive_Load(object sender, EventArgs e)
+        private async void IGNReviewExclusive_LoadQuary(object sender, EventArgs e)
         {
             setButtons();
             if (current != null)
@@ -35,7 +35,7 @@ namespace GamingDashboard
                 current.BackColor = Color.Blue;
             }
 
-            List<IGNReview> iGNReviews = await db.SearchIGNReview(platform, sortBY);
+            List<IGNReview> iGNReviews = await db.SearchIGNReview(qurry);
 
             List<IGNDisplayHelper> gridView = iGNReviews.Select(iGNReview => new IGNDisplayHelper
             {
@@ -48,10 +48,10 @@ namespace GamingDashboard
                 Console.WriteLine(Name = ignreview.Name);
             }
 
-            dataGridView2.Columns.Clear();
-            dataGridView2.DataSource = null;
+            dataGridView1.Columns.Clear();
+            dataGridView1.DataSource = null;
 
-            dataGridView2.DataSource = gridView;
+            dataGridView1.DataSource = gridView;
 
             Load_Images(iGNReviews);
 
@@ -60,17 +60,63 @@ namespace GamingDashboard
 
             imageColumn.Name = "ImageColumn";
             imageColumn.Width = 128; // Set the width for the desired aspect ratio
-            dataGridView2.Columns.Add(imageColumn);
-            dataGridView2.Columns[0].Width = 400;
-            dataGridView2.Columns[2].Width = imageScale;
+            dataGridView1.Columns.Add(imageColumn);
+            dataGridView1.Columns[0].Width = 400;
+            dataGridView1.Columns[2].Width = imageScale;
+                
+            // Adjust row height to 128 pixels
+
+            //Asynchronous call for images from the API, can be a little slow but atleast it does not crash the application untill complete
+
+            dataGridView1.Refresh();
+
+        }
+
+        private async void IGNReviewExclusive_Load(object sender, EventArgs e)
+        {
+            setButtons();
+            if (current != null)
+            {
+                current.BackColor = Color.Blue;
+            }
+
+            List<IGNReview> iGNReviews = await db.PlatformIGNReview(platform);
+
+            List<IGNDisplayHelper> gridView = iGNReviews.Select(iGNReview => new IGNDisplayHelper
+            {
+                Name = iGNReview.Name,
+                Score = scoreSettler(iGNReview.minScore, iGNReview.maxScore)
+            }).ToList();
+
+            foreach (IGNReview ignreview in iGNReviews)
+            {
+                Console.WriteLine(Name = ignreview.Name);
+            }
+
+            dataGridView1.Columns.Clear();
+            dataGridView1.DataSource = null;
+
+            dataGridView1.DataSource = gridView;
+
+            Load_Images(iGNReviews);
+
+            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
+            imageColumn.Name = "ImageColumn";
+
+            imageColumn.Name = "ImageColumn";
+            imageColumn.Width = 128; // Set the width for the desired aspect ratio
+            dataGridView1.Columns.Add(imageColumn);
+            dataGridView1.Columns[0].Width = 400;
+            dataGridView1.Columns[2].Width = imageScale;
 
             // Adjust row height to 128 pixels
 
             //Asynchronous call for images from the API, can be a little slow but atleast it does not crash the application untill complete
 
-            dataGridView2.Refresh();
+            dataGridView1.Refresh();
 
         }
+
 
         private async void Load_Images(List<IGNReview> ign)
         {
@@ -100,7 +146,7 @@ namespace GamingDashboard
 
                 try
                 {
-                    dataGridView2.Rows[i].Cells["ImageColumn"] = imageCell;
+                    dataGridView1.Rows[i].Cells["ImageColumn"] = imageCell;
                 }
                 catch (Exception ex)
                 {
@@ -119,65 +165,84 @@ namespace GamingDashboard
             
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void setButtons()
         {
-            //Need to fix this
+            button7.BackColor = Color.White;
+            button8.BackColor = Color.White;
+            button9.BackColor = Color.White;
+            button10.BackColor = Color.White;
+            button11.BackColor = Color.White;
+
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
         {
-            //Need to fix this
+            platform = "PlayStation 5";
+            current = button7;
+            IGNReviewExclusive_Load(sender, e);
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            platform = "Nintendo Switch";
+            current = button8;
+            IGNReviewExclusive_Load(sender, e);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            platform = "PC";
+            current = button9;
+            IGNReviewExclusive_Load(sender, e);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            platform = "Xbox One";
+            current = button10;
+            IGNReviewExclusive_Load(sender, e);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            platform = "PlayStation 4";
+            current = button11;
+            IGNReviewExclusive_Load(sender, e);
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Need to fix this
-            IGNReviewExclusive_Load(sender, e);
-
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //Need to fix this
-            IGNReviewExclusive_Load(sender, e);
-        }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //Need to fix this
-            IGNReviewExclusive_Load(sender, e);
-        }
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //Need to fix this
-            IGNReviewExclusive_Load(sender, e);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //Need to fix this
-            IGNReviewExclusive_Load(sender, e);
-        }
-        private void setButtons()
-        {
-            button1.BackColor = Color.White;
-            button2.BackColor = Color.White;
-            button3.BackColor = Color.White;
-            button4.BackColor = Color.White;
-            button6.BackColor = Color.White;
+            qurry = textBox2.Text;
+            current = button1;
+            IGNReviewExclusive_LoadQuary(sender, e);
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
 
-        }
+        //private void button5_Click(object sender, EventArgs e)
+        //{
+        //    //Need a form manager class to manage all forms. Coming soon.
+        //    EpicSpecialExclusive EpicForm = new EpicSpecialExclusive(db);
+        //    //this.Close();
+        //    EpicForm.Show(new EpicSpecialExclusive(db));
+        //}
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //Need a form manager class to manage all forms. Coming soon.
-            IGNReviewExclusive newsExclusiveForm = new IGNReviewExclusive(db);
-            //this.Close();
-            newsExclusiveForm.Show(new IGNReviewExclusive(db));
-        }
     }
 
     //Helper class to better display what i need
