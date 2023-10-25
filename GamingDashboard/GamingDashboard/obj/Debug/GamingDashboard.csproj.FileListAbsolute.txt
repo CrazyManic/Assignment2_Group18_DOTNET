@@ -44,3 +44,5 @@ C:\Users\aliaghajafari\Desktop\app.net\Assignment2_Group18_DOTNET\GamingDashboar
 C:\Users\aliaghajafari\Desktop\app.net\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.csproj.CopyComplete
 C:\Users\aliaghajafari\Desktop\app.net\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.exe
 C:\Users\aliaghajafari\Desktop\app.net\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.pdb
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.Login.resources
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.SignUp.resources

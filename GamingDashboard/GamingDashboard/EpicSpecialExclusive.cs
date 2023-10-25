@@ -25,6 +25,8 @@ namespace GamingDashboard
         {
             InitializeComponent();
             this.db = db;
+
+            Console.WriteLine(db.LogedInUser.Username);
         }
 
         private async void EpicSpecialExclusive_Load(object sender, EventArgs e)
