@@ -78,7 +78,7 @@ namespace GamingDashboard
 
         private void signupBtn_Click(object sender, EventArgs e)
         {
-            SignUp signup = new SignUp(this.database);
+            SignUp signup = new SignUp(this.database); // pass this database to the login form. 
             this.Hide();
             signup.Show();
             //this.Close();

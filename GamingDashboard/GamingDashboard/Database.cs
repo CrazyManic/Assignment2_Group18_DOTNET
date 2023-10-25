@@ -241,8 +241,14 @@ namespace GamingDashboard
                 {
                     response.EnsureSuccessStatusCode();
                     var responseContent = await response.Content.ReadAsStringAsync();
-                    List<EpicSpecial> epicSpecials = JsonConvert.DeserializeObject<List<EpicSpecial>>(responseContent); //This JSON Conversion method requires your Model Class to exactly represent the response JSON from the api. 
-                    return epicSpecials;  //returnm the api call
+                    if (response != null)
+                    {
+                        List<EpicSpecial> epicSpecials = JsonConvert.DeserializeObject<List<EpicSpecial>>(responseContent); //This JSON Conversion method requires your Model Class to exactly represent the response JSON from the api. 
+                        return epicSpecials;  //returnm the api call
+                    } else
+                    {
+                        return new List<EpicSpecial>();
+                    }
                 }
             }
         }

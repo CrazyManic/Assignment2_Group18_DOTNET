@@ -36,41 +36,53 @@ namespace GamingDashboard
             {
                 current.BackColor = Color.Blue;
             }
+            try
+            { //trys to find a list of epic specials based on the category and search words.
+                List<EpicSpecial> epicSpecials = await db.SearchEpicSales(searchBar, category);
+                //Converts the lengthy epic specials into much more paletable display helper datasources. 
+                List<epicDisplayHelper> gridView = epicSpecials.Select(epicSpecial => new epicDisplayHelper
+                {
+                    Title = epicSpecial.Title,
+                    Price = priceFormatter(epicSpecial.CurrentPrice),
+                }).ToList();
 
-            List<EpicSpecial> epicSpecials = await db.SearchEpicSales(searchBar, category);
+                //debug
+                foreach (EpicSpecial epic in epicSpecials)
+                {
+                    Console.WriteLine(epic.Title);
+                }
 
-            List<epicDisplayHelper> gridView = epicSpecials.Select(epicSpecial => new epicDisplayHelper
+                dataGridView1.Columns.Clear(); 
+                dataGridView1.DataSource = null;
+
+                dataGridView1.DataSource = gridView;
+                //Loads the images from the provided API urls, into smaller images, this is an asynchronous task. 
+                Load_Images(epicSpecials);
+
+                DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
+                imageColumn.Name = "ImageColumn";
+
+                imageColumn.Name = "ImageColumn";
+                imageColumn.Width = 128; // Set the width for the desired aspect ratio
+                dataGridView1.Columns.Add(imageColumn);
+                dataGridView1.Columns[0].Width = 400;
+                dataGridView1.Columns[2].Width = imageScale;
+
+                // Adjust row height to 128 pixels
+
+                //Asynchronous call for images from the API, can be a little slow but atleast it does not crash the application untill complete
+
+                dataGridView1.Refresh();
+            }
+            catch(Exception ex)
             {
-                Title = epicSpecial.Title,
-                Price = priceFormatter( epicSpecial.CurrentPrice),
-            }).ToList();
-
-            foreach (EpicSpecial epic in epicSpecials)
-            {
-                Console.WriteLine(epic.Title);
+                //Catches null return exception from the API and clears the display port.
+                List<EpicSpecial> epicSpecials;
+                dataGridView1.Columns.Clear();
+                dataGridView1.Refresh();
             }
 
-            dataGridView1.Columns.Clear();
-            dataGridView1.DataSource = null;
-
-            dataGridView1.DataSource = gridView;
-
-            Load_Images(epicSpecials);
-
-            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
-            imageColumn.Name = "ImageColumn";
-
-            imageColumn.Name = "ImageColumn";
-            imageColumn.Width = 128; // Set the width for the desired aspect ratio
-            dataGridView1.Columns.Add(imageColumn);
-            dataGridView1.Columns[0].Width = 400;
-            dataGridView1.Columns[2].Width = imageScale;
-
-            // Adjust row height to 128 pixels
-
-            //Asynchronous call for images from the API, can be a little slow but atleast it does not crash the application untill complete
-
-            dataGridView1.Refresh();
+            
 
         }
 
