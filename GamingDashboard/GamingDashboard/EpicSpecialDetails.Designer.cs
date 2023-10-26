@@ -105,6 +105,7 @@ namespace GamingDashboard
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.WaitOnLoad = true;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label1
             // 
@@ -140,6 +141,7 @@ namespace GamingDashboard
             this.Controls.Add(this.GameTitle);
             this.Name = "EpicSpecialDetails";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.EpicSpecialDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

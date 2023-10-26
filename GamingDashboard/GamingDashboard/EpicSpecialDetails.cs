@@ -88,9 +88,19 @@ namespace GamingDashboard
                 button2.BackgroundImage = Properties.Resources.favourite_14390;
             } else
             {
-                database.RemoveEpicFavorite(database.LogedInUser, epic);
+                database.RemoveEpicFavorite(database.LogedInUser, epic.Id);
                 button2.BackgroundImage = Properties.Resources.Heart;
             }
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EpicSpecialDetails_Load(object sender, EventArgs e)
+        {
 
         }
     }

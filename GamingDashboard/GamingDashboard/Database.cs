@@ -434,7 +434,7 @@ namespace GamingDashboard
 
         }
 
-        public void RemoveEpicFavorite(User user, EpicSpecial epic)
+        public void RemoveEpicFavorite(User user, string epicId)
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
@@ -444,7 +444,7 @@ namespace GamingDashboard
                 using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
                 {
                     checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
-                    checkCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                    checkCommand.Parameters.AddWithValue("@EpicId", epicId);
                     int count = Convert.ToInt32(checkCommand.ExecuteScalar());
 
                     if (count > 0)
@@ -453,7 +453,7 @@ namespace GamingDashboard
                         using (SQLiteCommand deleteCommand = new SQLiteCommand("DELETE FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
                         {
                             deleteCommand.Parameters.AddWithValue("@UserId", user.UserId);
-                            deleteCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                            deleteCommand.Parameters.AddWithValue("@EpicId", epicId);
                             deleteCommand.ExecuteNonQuery();
                         }
                     }
