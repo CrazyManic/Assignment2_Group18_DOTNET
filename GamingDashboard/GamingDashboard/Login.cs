@@ -18,12 +18,13 @@ namespace GamingDashboard
         {
             this.database = database;
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -54,8 +55,12 @@ namespace GamingDashboard
 
                     database.LogedInUser = user; //Set the user in the database
 
-                    UserManagementDashboard userManager = new UserManagementDashboard(database);
-                    userManager.Show();
+
+
+
+                    // UserManagementDashboard userManager = new UserManagementDashboard(database); we're going to main now.
+                    MainPage main = new MainPage(database);
+                    main.Show();
                     this.Hide();
 
                     /* comment it for a while

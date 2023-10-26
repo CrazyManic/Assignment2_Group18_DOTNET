@@ -99,5 +99,15 @@ namespace GamingDashboard.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Video_Game_Controller_Logo {
+            get {
+                object obj = ResourceManager.GetObject("Video-Game-Controller-Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
