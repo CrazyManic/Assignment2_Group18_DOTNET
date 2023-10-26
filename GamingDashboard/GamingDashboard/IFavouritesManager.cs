@@ -18,6 +18,6 @@ namespace GamingDashboard
         void RemoveEpicFavorite(User user, EpicSpecial epic); //Given the current userId and SteamSale Id a favourite should be removed from the db
 
         bool isEpicAlreadyAdded(User user, EpicSpecial epic);
-        List<EpicSpecial> GetFavorites(int userId); // Given a user id the method will return all SteamSale favourites in the db
+        List<EpicFavourite> GetFavorites(User user); // Given a user id the method will return all SteamSale favourites in the db
     }
 }

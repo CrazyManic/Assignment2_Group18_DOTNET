@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EpicFavourite.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
@@ -76,17 +77,17 @@
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="DataBaseBuilder.cs" />
-    <Compile Include="FavouriteManagementDashboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FavouriteManagementDashboard.Designer.cs">
-      <DependentUpon>FavouriteManagementDashboard.cs</DependentUpon>
-    </Compile>
     <Compile Include="EpicSpecialDetails.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EpicSpecialDetails.Designer.cs">
       <DependentUpon>EpicSpecialDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FavouriteManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FavouriteManager.Designer.cs">
+      <DependentUpon>FavouriteManager.cs</DependentUpon>
     </Compile>
     <Compile Include="MainPage.cs">
       <SubType>Form</SubType>
@@ -139,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EpicSpecialExclusive.resx">
       <DependentUpon>EpicSpecialExclusive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FavouriteManager.resx">
+      <DependentUpon>FavouriteManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

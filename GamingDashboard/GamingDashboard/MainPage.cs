@@ -56,5 +56,12 @@ namespace GamingDashboard
             userManager.Show();
             this.Dispose();
         }
+
+        private void MyFavouritesBtn_Click(object sender, EventArgs e)
+        {
+            FavouriteManager faveManager = new FavouriteManager(database);
+            faveManager.Show();
+            this.Dispose();
+        }
     }
 }

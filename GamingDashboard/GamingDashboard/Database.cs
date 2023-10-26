@@ -51,7 +51,7 @@ namespace GamingDashboard
         public User CreateUser(string username, string password, string email, string FirstName, string LastName)
         {
             User user = new User();
-            using(var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
                 string checkUserName = "SELECT * FROM Users where Username = @username";
@@ -59,20 +59,20 @@ namespace GamingDashboard
                 using (SQLiteCommand command = new SQLiteCommand(checkUserName, connection))
                 {
                     command.Parameters.AddWithValue("@username", username);
-                     using (SQLiteDataReader reader = command.ExecuteReader())
+                    using (SQLiteDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             return null;
                         }
 
-                    }  
+                    }
                 }
 
                 // if there is no username present procced
                 string insertUser = "INSERT INTO Users(username, password,email, firstName, lastName) VALUES (@username, @password, @email, @firstName, @lastName) ";
 
-                using(SQLiteCommand command = new SQLiteCommand(insertUser, connection))
+                using (SQLiteCommand command = new SQLiteCommand(insertUser, connection))
                 {
                     command.Parameters.AddWithValue("@username", username);
                     command.Parameters.AddWithValue("@password", password);
@@ -86,12 +86,12 @@ namespace GamingDashboard
                     {
                         // User creation successful; return true.
                         user = GetUserByUsername(username);
-                        
+
                     }
                 }
             }
             return user;
-            
+
         }
 
         public User GetUserById(int userId)
@@ -107,7 +107,7 @@ namespace GamingDashboard
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@username", username);
-                   
+
 
                     using (SQLiteDataReader reader = command.ExecuteReader())
                     {
@@ -139,12 +139,12 @@ namespace GamingDashboard
             {
                 connection.Open();
                 string query = "select * from users where username = @username AND Password = @password";
-                using(SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@username", username);
                     command.Parameters.AddWithValue("@password", password);
 
-                    using(SQLiteDataReader reader = command.ExecuteReader())
+                    using (SQLiteDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -152,8 +152,8 @@ namespace GamingDashboard
                             // return a user object instead of true or false
                             User user = new User
                             {
-                               UserId = int.Parse(reader["UserId"].ToString()), // Assuming UserId is an int
-                                
+                                UserId = int.Parse(reader["UserId"].ToString()), // Assuming UserId is an int
+
                                 UserFirstName = reader["FirstName"].ToString(),
                                 UserLastName = reader["LastName"].ToString(),
                                 UserEmail = reader["Email"].ToString(),
@@ -171,7 +171,7 @@ namespace GamingDashboard
 
         public string Update(int userId, string username, string password, string email, string FirstName, string LastName)
         {
-            
+
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
@@ -186,7 +186,7 @@ namespace GamingDashboard
                     {
                         if (reader.Read())
                         {
-                            
+
                             return "Sorry! Username is already in use by another user!"; // Username is already in use by another user.
                         }
                     }
@@ -206,7 +206,7 @@ namespace GamingDashboard
                     int rowsAffected = updateCommand.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
-                       return "User information updated successfully" ; // User information updated successfully.
+                        return "User information updated successfully"; // User information updated successfully.
                     }
                     else
                     {
@@ -216,7 +216,7 @@ namespace GamingDashboard
                 }
             }
 
-          
+
         }
 
 
@@ -260,11 +260,11 @@ namespace GamingDashboard
         {
             string locale = "us";
             string country = "us";
-            if(searchWords.Length == 0)
+            if (searchWords.Length == 0)
             {
                 searchWords = " "; //the api seems to reply with the top list of elements if a space is parsed as the search word. null entry will respond with 404. 
             }
-            if(categories.Length == 0)
+            if (categories.Length == 0)
             {
                 categories = "Games"; //default back to games.
             }
@@ -297,11 +297,11 @@ namespace GamingDashboard
             string locale = "us";
             string country = "us";
 
-            if(searchWords == null)
+            if (searchWords == null)
             {
                 searchWords = " "; //the api seems to reply with the top list of elements if a space is parsed as the search word. null entry will respond with 404. 
             }
-            if ( categories == null)
+            if (categories == null)
             {
                 categories = "Games"; //default back to games.
             }
@@ -318,7 +318,7 @@ namespace GamingDashboard
                 request.Headers.Add("X-RapidAPI-Key", RapidApiKey);  //the request headers are attached, these are required by rapid API. 
                 request.Headers.Add("X-RapidAPI-Host", EpicRapidApiHost);
 
-                using( var response = await client.SendAsync(request))
+                using (var response = await client.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     var responseContent = await response.Content.ReadAsStringAsync();
@@ -331,7 +331,7 @@ namespace GamingDashboard
 
         public List<EpicSpecial> FilterEpicSalesByCategory(string category)
         {
-            return new List<EpicSpecial>(); 
+            return new List<EpicSpecial>();
         }
 
 
@@ -344,7 +344,7 @@ namespace GamingDashboard
 
         public List<News> GetNewsArticles()
         {
-            return new List<News>(); 
+            return new List<News>();
         }
 
         public List<News> SearchNews(string keyword)
@@ -354,7 +354,7 @@ namespace GamingDashboard
 
         public List<News> FilterNewsByCategory(string category)
         {
-            return new List<News>(); 
+            return new List<News>();
         }
 
         ///////////////////////////////////////////////////////////////////////////////////
@@ -370,7 +370,7 @@ namespace GamingDashboard
 
         public List<News> GetNewsFavorites(int userId)
         {
-            return new List<News>(); 
+            return new List<News>();
         }
 
         public void AddEpicFavorite(User user, EpicSpecial epic)
@@ -463,12 +463,41 @@ namespace GamingDashboard
             }
         }
 
-        public List<EpicSpecial> GetFavorites(int userId)
+        public List<EpicFavourite> GetFavorites(User user)
         {
-            return new List<EpicSpecial>(); 
+            List<EpicFavourite> favorites = new List<EpicFavourite>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand getFaves = new SQLiteCommand("SELECT * FROM EPICFAVOURITES WHERE USERID = @UserId"))
+                {
+                    getFaves.Parameters.AddWithValue("@UserId", user.UserId);
+                    getFaves.Connection = connection;
+                    using (SQLiteDataReader reader = getFaves.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            EpicFavourite favorite = new EpicFavourite
+                            {
+                                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                                EpicId = reader.GetString(reader.GetOrdinal("EpicId")),
+                                Title = reader.GetString(reader.GetOrdinal("Title")),
+                                Price = reader.GetInt32(reader.GetOrdinal("Price")),
+                                imageUrl = reader.GetString(reader.GetOrdinal("imageURL"))
+                            };
+
+                            favorites.Add(favorite);
+                        }
+                    }
+                }
+            }
+
+            return favorites;
         }
 
-    }
 
-    //Literally all database methods can go here, just make sure they are all grouped in order according to the order of the lists. 
+
+        //Literally all database methods can go here, just make sure they are all grouped in order according to the order of the lists. 
+    }
 }

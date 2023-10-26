@@ -78,6 +78,7 @@ namespace GamingDashboard
             this.MyFavouritesBtn.TabIndex = 3;
             this.MyFavouritesBtn.Text = "My Favourites";
             this.MyFavouritesBtn.UseVisualStyleBackColor = true;
+            this.MyFavouritesBtn.Click += new System.EventHandler(this.MyFavouritesBtn_Click);
             // 
             // pictureBox1
             // 

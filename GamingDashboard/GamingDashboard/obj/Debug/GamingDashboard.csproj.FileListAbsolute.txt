@@ -48,3 +48,4 @@ C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard
 C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.SignUp.resources
 C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.MainPage.resources
 C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.EpicSpecialDetails.resources
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.FavouriteManager.resources
