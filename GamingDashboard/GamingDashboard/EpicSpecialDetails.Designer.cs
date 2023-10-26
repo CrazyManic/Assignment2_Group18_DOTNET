@@ -34,8 +34,8 @@ namespace GamingDashboard
             this.button1 = new System.Windows.Forms.Button();
             this.GameDesc = new System.Windows.Forms.Label();
             this.PriceLbl = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,18 +79,6 @@ namespace GamingDashboard
             this.PriceLbl.TabIndex = 19;
             this.PriceLbl.Text = "Price";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.InitialImage = global::GamingDashboard.Properties.Resources.Video_Game_Controller_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(48, 95);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(283, 330);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.WaitOnLoad = true;
-            // 
             // button2
             // 
             this.button2.BackgroundImage = global::GamingDashboard.Properties.Resources.Heart;
@@ -103,6 +91,18 @@ namespace GamingDashboard
             this.button2.TabIndex = 20;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.InitialImage = global::GamingDashboard.Properties.Resources.Video_Game_Controller_Logo;
+            this.pictureBox1.Location = new System.Drawing.Point(48, 95);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(283, 330);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.WaitOnLoad = true;
             // 
             // EpicSpecialDetails
             // 

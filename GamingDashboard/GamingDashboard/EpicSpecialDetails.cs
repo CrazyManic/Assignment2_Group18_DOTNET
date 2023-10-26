@@ -32,7 +32,7 @@ namespace GamingDashboard
 
             if (database.isEpicAlreadyAdded(database.LogedInUser, epic))
             {
-                button2.BackColor = Color.Red;
+                button2.BackgroundImage = Properties.Resources.favourite_14390;
             }
 
             loadImage();
@@ -80,7 +80,7 @@ namespace GamingDashboard
         private void button2_Click_1(object sender, EventArgs e)
         {
             database.AddEpicFavorite(database.LogedInUser, epic);
-            button2.BackColor = Color.Red;
+            button2.BackgroundImage = Properties.Resources.favourite_14390;
 
         }
     }
