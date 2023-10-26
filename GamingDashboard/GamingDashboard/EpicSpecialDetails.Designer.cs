@@ -36,6 +36,8 @@ namespace GamingDashboard
             this.PriceLbl = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,7 +75,7 @@ namespace GamingDashboard
             this.PriceLbl.AutoSize = true;
             this.PriceLbl.BackColor = System.Drawing.SystemColors.Control;
             this.PriceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PriceLbl.Location = new System.Drawing.Point(423, 286);
+            this.PriceLbl.Location = new System.Drawing.Point(423, 348);
             this.PriceLbl.Name = "PriceLbl";
             this.PriceLbl.Size = new System.Drawing.Size(61, 25);
             this.PriceLbl.TabIndex = 19;
@@ -85,7 +87,7 @@ namespace GamingDashboard
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(585, 263);
+            this.button2.Location = new System.Drawing.Point(585, 325);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(56, 48);
             this.button2.TabIndex = 20;
@@ -104,12 +106,32 @@ namespace GamingDashboard
             this.pictureBox1.TabStop = false;
             this.pictureBox1.WaitOnLoad = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(395, 266);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(576, 266);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "label2";
+            // 
             // EpicSpecialDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.PriceLbl);
             this.Controls.Add(this.GameDesc);
@@ -132,5 +154,7 @@ namespace GamingDashboard
         private System.Windows.Forms.Label GameDesc;
         private System.Windows.Forms.Label PriceLbl;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

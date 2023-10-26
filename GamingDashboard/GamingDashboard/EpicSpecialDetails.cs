@@ -27,7 +27,9 @@ namespace GamingDashboard
             InitializeComponent();
             GameTitle.Text = epic.Title;
             GameDesc.Text = epic.Description;
-            PriceLbl.Text = "Price: $" + epic.CurrentPrice/100 ;
+            PriceLbl.Text = "Price: $" + epic.CurrentPrice/100;
+            label1.Text = "Published: " + epic.PublisherName;
+            label2.Text = "Release: " + epic.ReleaseDate;
             checkFave();
 
             if (database.isEpicAlreadyAdded(database.LogedInUser, epic))
@@ -79,9 +81,19 @@ namespace GamingDashboard
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            database.AddEpicFavorite(database.LogedInUser, epic);
-            button2.BackgroundImage = Properties.Resources.favourite_14390;
+           
+            if(!database.isEpicAlreadyAdded(database.LogedInUser, epic))
+            {
+                database.AddEpicFavorite(database.LogedInUser, epic);
+                button2.BackgroundImage = Properties.Resources.favourite_14390;
+            } else
+            {
+                database.RemoveEpicFavorite(database.LogedInUser, epic);
+                button2.BackgroundImage = Properties.Resources.Heart;
+            }
 
         }
+
+      
     }
 }

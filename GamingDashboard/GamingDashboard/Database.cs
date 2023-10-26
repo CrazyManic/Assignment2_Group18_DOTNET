@@ -399,11 +399,6 @@ namespace GamingDashboard
                             insertCommand.ExecuteNonQuery();
                         }
                     }
-                    else
-                    {
-                        // Optionally, handle the case where the EpicSpecial is already in the user's favorites
-                        // You can raise an exception, display a message, or take other appropriate action.
-                    }
                 }
 
                 connection.Close();
@@ -441,6 +436,31 @@ namespace GamingDashboard
 
         public void RemoveEpicFavorite(User user, EpicSpecial epic)
         {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // Check if the EpicSpecial is in the user's favorites
+                using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                    checkCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        // If the EpicSpecial is in the user's favorites, delete it
+                        using (SQLiteCommand deleteCommand = new SQLiteCommand("DELETE FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
+                        {
+                            deleteCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                            deleteCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                            deleteCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
         }
 
         public List<EpicSpecial> GetFavorites(int userId)
