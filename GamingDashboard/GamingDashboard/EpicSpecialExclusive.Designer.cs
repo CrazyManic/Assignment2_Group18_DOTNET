@@ -67,8 +67,12 @@ namespace GamingDashboard
             this.dataGridView1.RowHeadersWidth = 68;
             this.dataGridView1.RowTemplate.DividerHeight = 4;
             this.dataGridView1.RowTemplate.Height = 90;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(796, 482);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.TabStop = false;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             // 
             // textBox1
             // 

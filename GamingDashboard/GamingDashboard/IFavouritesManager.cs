@@ -13,9 +13,11 @@ namespace GamingDashboard
         void RemoveNewsFavorite(int userId, int newsId);
 
         List<News> GetNewsFavorites(int userId); // given a user id the method will return all his favourites as news classes
-        void AddSteamSaleFavorite(int userId, int saleId); //Given the current userId and SteamSale Id a new favourite should be added to the db
+        void AddEpicFavorite(User user, EpicSpecial epic); //Given the current userId and SteamSale Id a new favourite should be added to the db
 
-        void RemoveSteamSaleFavorite(int userId, int saleId); //Given the current userId and SteamSale Id a favourite should be removed from the db
-        List<EpicSpecial> GetSteamSaleFavorites(int userId); // Given a user id the method will return all SteamSale favourites in the db
+        void RemoveEpicFavorite(User user, EpicSpecial epic); //Given the current userId and SteamSale Id a favourite should be removed from the db
+
+        bool isEpicAlreadyAdded(User user, EpicSpecial epic);
+        List<EpicSpecial> GetFavorites(int userId); // Given a user id the method will return all SteamSale favourites in the db
     }
 }
