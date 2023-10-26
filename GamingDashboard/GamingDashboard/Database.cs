@@ -373,15 +373,77 @@ namespace GamingDashboard
             return new List<News>(); 
         }
 
-        public void AddSteamSaleFavorite(int userId, int saleId)
+        public void AddEpicFavorite(User user, EpicSpecial epic)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // Check if the EpicSpecial is already in the user's favorites
+                using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                    checkCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count == 0)
+                    {
+                        // If the EpicSpecial is not in the user's favorites, add it
+                        using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO EpicFavourites (UserId, EpicId, Title, Price, imageURL) VALUES (@UserId, @EpicId, @Title, @Price, @imageURL)", connection))
+                        {
+                            insertCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                            insertCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                            insertCommand.Parameters.AddWithValue("@Title", epic.Title);
+                            insertCommand.Parameters.AddWithValue("@Price", (int)epic.CurrentPrice);
+                            insertCommand.Parameters.AddWithValue("@imageURL", epic.KeyImages.FirstOrDefault()?.Url);
+                            insertCommand.ExecuteNonQuery();
+                        }
+                    }
+                    else
+                    {
+                        // Optionally, handle the case where the EpicSpecial is already in the user's favorites
+                        // You can raise an exception, display a message, or take other appropriate action.
+                    }
+                }
+
+                connection.Close();
+            }
+
+        }
+
+        public bool isEpicAlreadyAdded(User user, EpicSpecial epic)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // Check if the EpicSpecial is already in the user's favorites
+                using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                    checkCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count == 0)
+                    {
+                        connection.Close();
+                        return false;
+                    }
+                    else
+                    {
+                        connection.Close();
+                        return true;
+                    }
+                }
+            }
+
+        }
+
+        public void RemoveEpicFavorite(User user, EpicSpecial epic)
         {
         }
 
-        public void RemoveSteamSaleFavorite(int userId, int saleId)
-        {
-        }
-
-        public List<EpicSpecial> GetSteamSaleFavorites(int userId)
+        public List<EpicSpecial> GetFavorites(int userId)
         {
             return new List<EpicSpecial>(); 
         }

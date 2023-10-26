@@ -21,6 +21,7 @@ namespace GamingDashboard
         public string searchBar = ""; //api call for searchwords
         public string category = ""; //API call for category
         private Button current = null; //Tracks the current category button to make it blue.
+        List<EpicSpecial> epicSpecials;
         public EpicSpecialExclusive(Database db)
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace GamingDashboard
             }
             try
             { //trys to find a list of epic specials based on the category and search words.
-                List<EpicSpecial> epicSpecials = await db.SearchEpicSales(searchBar, category);
+                epicSpecials = await db.SearchEpicSales(searchBar, category);
                 //Converts the lengthy epic specials into much more paletable display helper datasources. 
                 List<epicDisplayHelper> gridView = epicSpecials.Select(epicSpecial => new epicDisplayHelper
                 {
@@ -205,6 +206,19 @@ namespace GamingDashboard
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Console.WriteLine( epicSpecials[e.RowIndex].Title);
+            EpicSpecialDetails epicView = new EpicSpecialDetails(db, epicSpecials[e.RowIndex]);
+            epicView.Show();
+            this.Dispose();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

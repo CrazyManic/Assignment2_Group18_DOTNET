@@ -82,6 +82,12 @@
     <Compile Include="FavouriteManagementDashboard.Designer.cs">
       <DependentUpon>FavouriteManagementDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="EpicSpecialDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EpicSpecialDetails.Designer.cs">
+      <DependentUpon>EpicSpecialDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
       <DependentUpon>UserManagementDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Validation.cs" />
+    <EmbeddedResource Include="EpicSpecialDetails.resx">
+      <DependentUpon>EpicSpecialDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EpicSpecialExclusive.resx">
       <DependentUpon>EpicSpecialExclusive.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,6 +190,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Video-Game-Controller-Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Heart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

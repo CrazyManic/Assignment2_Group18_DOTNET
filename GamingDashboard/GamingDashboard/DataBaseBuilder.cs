@@ -47,12 +47,14 @@ namespace GamingDashboard
                                 )");
 
                     // Create SteamSpecialFavourites table
-                    queries.Add(@"CREATE TABLE SteamSpecialFavourites (
+                    queries.Add(@"CREATE TABLE EpicFavourites (
                                     UserId INTEGER,
-                                    SaleId INTEGER,
-                                    PRIMARY KEY (UserId, SaleId),
-                                    FOREIGN KEY (UserId) REFERENCES Users (UserId),
-                                    FOREIGN KEY (SaleId) REFERENCES SteamSpecials (SaleId)
+                                    EpicId TEXT,
+                                    Title TEXT,
+                                    Price INTEGER,
+                                    imageURL TEXT,
+                                    PRIMARY KEY (UserId, EpicId),
+                                    FOREIGN KEY (UserId) REFERENCES Users (UserId)
                                 )");
 
                     // Create News table
