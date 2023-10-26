@@ -19,9 +19,10 @@ namespace GamingDashboard
         public UserManagementDashboard(Database db)
         {
             InitializeComponent();
+
             this.db = db;
             User user = db.LogedInUser;
-            
+            this.StartPosition = FormStartPosition.CenterScreen;
             firstNameInput1.Text = user.UserFirstName;
             lastNameInput1.Text = user.UserLastName;
             emailInput1.Text = user.UserEmail;
@@ -84,6 +85,10 @@ namespace GamingDashboard
         private void backBtn_Click(object sender, EventArgs e)
         {
             //not sure where you want the back button should take us to???
+            // i got chu ali. 
+            MainPage main = new MainPage(db);
+            main.Show();
+            this.Dispose();
         }
     }
 }
