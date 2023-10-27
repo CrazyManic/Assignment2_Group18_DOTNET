@@ -39,6 +39,7 @@ namespace GamingDashboard
             this.label4 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             button7 = new System.Windows.Forms.Button();
             button8 = new System.Windows.Forms.Button();
             button9 = new System.Windows.Forms.Button();
@@ -103,6 +104,17 @@ namespace GamingDashboard
             button11.UseVisualStyleBackColor = true;
             button11.Click += new System.EventHandler(this.button11_Click);
             // 
+            // button1
+            // 
+            button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            button1.Location = new System.Drawing.Point(670, 67);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(152, 36);
+            button1.TabIndex = 9;
+            button1.Text = "Search";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -141,21 +153,22 @@ namespace GamingDashboard
             this.label5.Text = "SearchBar";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // button1
+            // button2
             // 
-            button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            button1.Location = new System.Drawing.Point(670, 67);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(152, 36);
-            button1.TabIndex = 9;
-            button1.Text = "Search";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += new System.EventHandler(this.button1_Click);
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(670, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(231, 40);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Epic Games Store";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // IGNReviewExclusive
             // 
             this.BackgroundImage = global::GamingDashboard.Properties.Resources.pattern;
-            this.ClientSize = new System.Drawing.Size(944, 477);
+            this.ClientSize = new System.Drawing.Size(909, 477);
+            this.Controls.Add(this.button2);
             this.Controls.Add(button1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox2);
@@ -181,17 +194,18 @@ namespace GamingDashboard
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button5;
+
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

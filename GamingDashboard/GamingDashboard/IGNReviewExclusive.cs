@@ -234,6 +234,12 @@ namespace GamingDashboard
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            EpicSpecialExclusive newsExclusiveForm = new EpicSpecialExclusive(db);
+            newsExclusiveForm.Show(new EpicSpecialExclusive(db));
+        }
+
 
         //private void button5_Click(object sender, EventArgs e)
         //{
