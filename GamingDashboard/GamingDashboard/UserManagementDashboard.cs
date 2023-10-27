@@ -78,6 +78,22 @@ namespace GamingDashboard
             
 
            string isUpdated = db.Update(db.LogedInUser.UserId,username, password, email, firstName, lastName);
+
+            //update userLoggedIn
+            if(isUpdated == "User information updated successfully")
+            {
+                User user = new User
+                {
+                    UserId = db.LogedInUser.UserId,
+                    UserFirstName = firstName,
+                    UserLastName = lastName,
+                    UserEmail = email,
+                    Username = username,
+                    Password = password
+                };
+                db.LogedInUser = user;
+
+            }
             MessageBox.Show(isUpdated);
 
         }
@@ -89,6 +105,11 @@ namespace GamingDashboard
             MainPage main = new MainPage(db);
             main.Show();
             this.Dispose();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -30,12 +30,15 @@ namespace GamingDashboard
         private void InitializeComponent()
         {
             this.txtUsername = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.loginBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.signupBtn = new System.Windows.Forms.Button();
+            this.sqLiteCommandBuilder1 = new System.Data.SQLite.SQLiteCommandBuilder();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtUsername
@@ -44,29 +47,18 @@ namespace GamingDashboard
             this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.875F);
             this.txtUsername.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.txtUsername.Location = new System.Drawing.Point(408, 255);
+            this.txtUsername.Location = new System.Drawing.Point(488, 552);
             this.txtUsername.MaximumSize = new System.Drawing.Size(321, 35);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(321, 39);
             this.txtUsername.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.875F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(379, 89);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(189, 59);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "LOGIN";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // loginBtn
             // 
             this.loginBtn.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.loginBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F);
             this.loginBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.loginBtn.Location = new System.Drawing.Point(181, 457);
+            this.loginBtn.Location = new System.Drawing.Point(261, 754);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(548, 57);
             this.loginBtn.TabIndex = 2;
@@ -77,8 +69,10 @@ namespace GamingDashboard
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.875F);
-            this.label2.Location = new System.Drawing.Point(174, 255);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(254, 552);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(188, 39);
             this.label2.TabIndex = 3;
@@ -88,8 +82,10 @@ namespace GamingDashboard
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.875F);
-            this.label3.Location = new System.Drawing.Point(174, 359);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(254, 656);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(180, 39);
             this.label3.TabIndex = 4;
@@ -101,7 +97,7 @@ namespace GamingDashboard
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.875F);
             this.txtPassword.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.txtPassword.Location = new System.Drawing.Point(408, 359);
+            this.txtPassword.Location = new System.Drawing.Point(488, 656);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(321, 39);
@@ -113,7 +109,7 @@ namespace GamingDashboard
             this.signupBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.signupBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F);
             this.signupBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.signupBtn.Location = new System.Drawing.Point(181, 547);
+            this.signupBtn.Location = new System.Drawing.Point(261, 844);
             this.signupBtn.Name = "signupBtn";
             this.signupBtn.Size = new System.Drawing.Size(548, 57);
             this.signupBtn.TabIndex = 6;
@@ -121,11 +117,43 @@ namespace GamingDashboard
             this.signupBtn.UseVisualStyleBackColor = false;
             this.signupBtn.Click += new System.EventHandler(this.signupBtn_Click);
             // 
+            // sqLiteCommandBuilder1
+            // 
+            this.sqLiteCommandBuilder1.DataAdapter = null;
+            this.sqLiteCommandBuilder1.QuoteSuffix = "]";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::GamingDashboard.Properties.Resources.Video_Game_Controller_Logo1;
+            this.pictureBox1.ImageLocation = "";
+            this.pictureBox1.Location = new System.Drawing.Point(352, 257);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(374, 236);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.875F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(419, 174);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(243, 59);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Welcome";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(855, 698);
+            this.BackgroundImage = global::GamingDashboard.Properties.Resources.pattern1;
+            this.ClientSize = new System.Drawing.Size(1074, 1129);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.signupBtn);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label3);
@@ -133,9 +161,12 @@ namespace GamingDashboard
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtUsername);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Login";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Login_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,12 +175,14 @@ namespace GamingDashboard
         #endregion
 
         private System.Windows.Forms.TextBox txtUsername;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button loginBtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button signupBtn;
+        private System.Data.SQLite.SQLiteCommandBuilder sqLiteCommandBuilder1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
