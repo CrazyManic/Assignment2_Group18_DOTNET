@@ -69,6 +69,7 @@ namespace GamingDashboard
             this.ComingSoonBtn.TabIndex = 2;
             this.ComingSoonBtn.Text = "Coming Soon";
             this.ComingSoonBtn.UseVisualStyleBackColor = true;
+            this.ComingSoonBtn.Click += new System.EventHandler(this.ComingSoonBtn_Click);
             // 
             // MyFavouritesBtn
             // 

@@ -63,5 +63,12 @@ namespace GamingDashboard
             faveManager.Show();
             this.Dispose();
         }
+
+        private void ComingSoonBtn_Click(object sender, EventArgs e)
+        {
+            ComingSoon comingSoon = new ComingSoon(database);
+            comingSoon.Show();
+            this.Dispose();
+        }
     }
 }
