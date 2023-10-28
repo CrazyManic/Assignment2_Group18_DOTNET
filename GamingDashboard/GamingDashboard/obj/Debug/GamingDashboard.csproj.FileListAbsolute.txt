@@ -76,3 +76,4 @@ C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard
 \\Mac\Home\Desktop\app.netAssignment\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.csproj.CopyComplete
 \\Mac\Home\Desktop\app.netAssignment\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.exe
 \\Mac\Home\Desktop\app.netAssignment\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.pdb
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.ComingSoon.resources

@@ -18,11 +18,13 @@ namespace GamingDashboard
         private Database database;
         private EpicSpecial epic;
         private int imageScaleFactor = 8;
+        private string from = ""; //Tracks which page the incoming data came from.
 
-        public EpicSpecialDetails(Database database, EpicSpecial epic)
+        public EpicSpecialDetails(Database database, EpicSpecial epic, String from)
         {
             this.database = database;
             this.epic = epic;
+            this.from = from;
             this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             GameTitle.Text = epic.Title;
@@ -47,9 +49,17 @@ namespace GamingDashboard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            EpicSpecialExclusive epicSpecialExclusive = new EpicSpecialExclusive(database);
-            epicSpecialExclusive.Show();
-            this.Dispose();
+            if (from == "epic")
+            {
+                EpicSpecialExclusive epicSpecialExclusive = new EpicSpecialExclusive(database);
+                epicSpecialExclusive.Show();
+                this.Dispose();
+            } else if(from == "comingSoon")
+            {
+                ComingSoon comingSoon = new ComingSoon(database);
+                comingSoon.Show();
+                this.Dispose();
+            }
         }
 
         private async void loadImage()

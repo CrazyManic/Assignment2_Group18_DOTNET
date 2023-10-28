@@ -213,7 +213,7 @@ namespace GamingDashboard
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Console.WriteLine( epicSpecials[e.RowIndex].Title);
-            EpicSpecialDetails epicView = new EpicSpecialDetails(db, epicSpecials[e.RowIndex]);
+            EpicSpecialDetails epicView = new EpicSpecialDetails(db, epicSpecials[e.RowIndex], "epic");
             epicView.Show();
             this.Dispose();
         }
