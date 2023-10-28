@@ -21,7 +21,7 @@ namespace GamingDashboard
     // no need for a FavSteamSale class. etc. 
 
     // All interface methods should be implimented right here on DataBase and most of them should query the SQL lite database. 
-    public class Database : IUserManager, IEpicSaleManager, INewsManager, IFavoritesManager
+    public class Database : IUserManager, IEpicSaleManager, IFavoritesManager, IIGNReviewManager
     {
         // data source
         private static string connectionString = "Data Source=../../../DashBoardDB.db;";
@@ -38,6 +38,12 @@ namespace GamingDashboard
         private const string EpicApiUpcomingUrl = "https://epic-store-games.p.rapidapi.com/comingSoon";
         private const string RapidApiKey = "4e3ce5bc43mshb49cfacf0855d76p10cf24jsn1ddf30e8ccbd";
         private const string EpicRapidApiHost = "epic-store-games.p.rapidapi.com";
+
+        //IGN api constant's 
+        private const string IGNApiBaseUrl = "https://ign-reviews.p.rapidapi.com/game-review/list";
+        private const string IGNAPISearchUrl = "https://ign-reviews.p.rapidapi.com/game-review/search";
+        private const string IGNApiKey = "677cb7e77fmshe8a11fe1bc970e2p19ed36jsn9cfd3ce7a575";
+        private const string IGNRapidApiHost = "ign-reviews.p.rapidapi.com";
 
         // The database class will be the only location where API calls and SQL queries will take palce. Feel free to create sub classes if you dont like everything all in one place. 
 
@@ -336,25 +342,119 @@ namespace GamingDashboard
 
 
         //////////////////////////////////////////////////////////////////////////////////////
-        ////   NEWS MANAGEMENT implimentation
+        ////   IGN MANAGEMENT implimentation
 
-        public void ReFreshNewsDatabase()
+        public async Task<List<IGNReview>> GetIGNReview()
         {
+            //All required API inputs as declared by rapidAPI
+            string sortOrder = "desc";
+            string sortBy = "publishDate";
+            string platform = "PlayStation 5";
+            int minScore = 7;
+            int limit = 20;
+            int maxScore = 8;
+            int skip = 0;
+            string publishedAfter = "2020-01-01";
+            string publishedBefore = "2023-01-01";
+
+            using (var client = new HttpClient())
+            {
+                var requestUri = new Uri($"{IGNApiBaseUrl}?sortOrder={sortOrder}&sortBy={sortBy}&platform={platform}&minScore={minScore}&limit={limit}&maxScore{maxScore}&skip{skip}&publishedAfter{publishedAfter}&publishedBefore{publishedBefore}");
+                //The API call string gets built
+
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,   //The request is declared
+                    RequestUri = requestUri
+                };
+
+                request.Headers.Add("X-RapidAPI-Key", IGNApiKey);  //the request headers are attached, these are required by rapid API. 
+                request.Headers.Add("X-RapidAPI-Host", IGNRapidApiHost);
+
+                using (var response = await client.SendAsync(request))  //Generic C# http async request method.
+                {
+                    response.EnsureSuccessStatusCode();
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    List<IGNReview> iGNReviews = JsonConvert.DeserializeObject<List<IGNReview>>(responseContent); //This JSON Conversion method requires your Model Class to exactly represent the response JSON from the api. 
+                    return iGNReviews;  //returnm the api call
+                }
+            }
         }
 
-        public List<News> GetNewsArticles()
+        public async Task<List<IGNReview>> PlatformIGNReview(string platform)
         {
-            return new List<News>();
+            //All required API inputs as declared by rapidAPI
+            string sortOrder = "desc";
+            string sortBy = "publishDate";
+            int minScore = 7;
+            int limit = 20;
+            int maxScore = 8;
+            int skip = 0;
+            string publishedAfter = "2020-01-01";
+            string publishedBefore = "2023-01-01";
+
+            if (platform.Length == 0)
+            {
+                platform = " ";
+            }
+
+            using (var client = new HttpClient())
+            {
+                var requestUri = new Uri($"{IGNApiBaseUrl}?sortOrder={sortOrder}&sortBy={sortBy}&platform={platform}&minScore={minScore}&limit={limit}&maxScore{maxScore}&skip{skip}&publishedAfter{publishedAfter}&publishedBefore{publishedBefore}");
+                //The API call string gets built
+
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,   //The request is declared
+                    RequestUri = requestUri
+                };
+
+                request.Headers.Add("X-RapidAPI-Key", IGNApiKey);  //the request headers are attached, these are required by rapid API. 
+                request.Headers.Add("X-RapidAPI-Host", IGNRapidApiHost);
+
+                using (var response = await client.SendAsync(request))  //Generic C# http async request method.
+                {
+                    response.EnsureSuccessStatusCode();
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    List<IGNReview> iGNReviews = JsonConvert.DeserializeObject<List<IGNReview>>(responseContent); //This JSON Conversion method requires your Model Class to exactly represent the response JSON from the api. 
+                    return iGNReviews;  //returnm the api call
+                }
+            }
         }
 
-        public List<News> SearchNews(string keyword)
+        //Given a platform and sort by condition will contact the api with an updated URI requesting new filtered data.
+        public async Task<List<IGNReview>> SearchIGNReview(string query)
         {
-            return new List<News>(); // Placeholder return
-        }
 
-        public List<News> FilterNewsByCategory(string category)
-        {
-            return new List<News>();
+            if (query.Length == 0)
+            {
+                query = " "; //the api seems to reply with the top list of elements if a space is parsed as the search word. null entry will respond with 404. 
+            }
+
+
+            using (var client = new HttpClient())
+            {
+
+                var requestUri = new Uri($"{IGNAPISearchUrl}?query={query}");
+                //The API call string gets built
+
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,   //The request is declared
+                    RequestUri = requestUri
+                };
+
+                request.Headers.Add("X-RapidAPI-Key", IGNApiKey);  //the request headers are attached, these are required by rapid API. 
+                request.Headers.Add("X-RapidAPI-Host", IGNRapidApiHost);
+
+                using (var response = await client.SendAsync(request))  //Generic C# http async request method.
+                {
+                    response.EnsureSuccessStatusCode();
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    List<IGNReview> iGNReviews = JsonConvert.DeserializeObject<List<IGNReview>>(responseContent); //This JSON Conversion method requires your Model Class to exactly represent the response JSON from the api. 
+                    return iGNReviews;  //returnm the api call
+                }
+            }
         }
 
         ///////////////////////////////////////////////////////////////////////////////////

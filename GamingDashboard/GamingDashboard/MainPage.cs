@@ -70,5 +70,11 @@ namespace GamingDashboard
             comingSoon.Show();
             this.Dispose();
         }
+
+        private void ReviewsBtn_Click(object sender, EventArgs e)
+        {
+            IGNReviewExclusive newsExclusiveForm = new IGNReviewExclusive(database);
+            newsExclusiveForm.Show(new IGNReviewExclusive(database));
+        }
     }
 }

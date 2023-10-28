@@ -60,6 +60,7 @@ namespace GamingDashboard
             this.ReviewsBtn.TabIndex = 1;
             this.ReviewsBtn.Text = "Reviews";
             this.ReviewsBtn.UseVisualStyleBackColor = true;
+            this.ReviewsBtn.Click += new System.EventHandler(this.ReviewsBtn_Click);
             // 
             // ComingSoonBtn
             // 
@@ -94,10 +95,10 @@ namespace GamingDashboard
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("ROG Fonts", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(184, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(579, 77);
+            this.label1.Size = new System.Drawing.Size(424, 73);
             this.label1.TabIndex = 5;
             this.label1.Text = "Dash Gaming";
             this.label1.Click += new System.EventHandler(this.label1_Click);

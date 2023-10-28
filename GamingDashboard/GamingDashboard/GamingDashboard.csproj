@@ -95,6 +95,14 @@
     <Compile Include="ComingSoon.Designer.cs">
       <DependentUpon>ComingSoon.cs</DependentUpon>
     </Compile>
+    <Compile Include="IGNReview.cs" />
+    <Compile Include="IGNReviewExclusive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IGNReviewExclusive.Designer.cs">
+      <DependentUpon>IGNReviewExclusive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IIGNReviewManager.cs" />
     <Compile Include="MainPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,11 +161,17 @@
     <EmbeddedResource Include="ComingSoon.resx">
       <DependentUpon>ComingSoon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IGNReviewExclusive.resx">
+      <DependentUpon>IGNReviewExclusive.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewsExclusive.resx">
+      <DependentUpon>NewsExclusive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

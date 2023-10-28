@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GamingDashboard
 {
+    //GET RID OF THIS
     public interface INewsManager
     {
         void ReFreshNewsDatabase();//e refresh news database class should check the date in SQL datatable, if todays system.date != the sql date.

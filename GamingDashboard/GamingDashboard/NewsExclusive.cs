@@ -10,6 +10,12 @@ using System.Windows.Forms;
 
 namespace GamingDashboard
 {
+
+    // GET RID OF THIS
+    /// <summary>
+    /// 
+    /// GET RID OF THIS
+    /// </summary>
     public partial class NewsExclusive : Form
     {
         private Database db;
@@ -17,6 +23,11 @@ namespace GamingDashboard
         {
             this.db = db;
             InitializeComponent();
+        }
+
+        private void NewsExclusive_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
