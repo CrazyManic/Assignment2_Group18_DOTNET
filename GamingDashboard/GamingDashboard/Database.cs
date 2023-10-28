@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 
 using Newtonsoft.Json;
+using System.Data.SQLite;
 
 namespace GamingDashboard
 {
@@ -22,6 +23,9 @@ namespace GamingDashboard
     // All interface methods should be implimented right here on DataBase and most of them should query the SQL lite database. 
     public class Database : IUserManager, IEpicSaleManager, INewsManager, IFavoritesManager, IIGNReviewManager
     {
+        // data source
+        private static string connectionString = "Data Source=../../../DashBoardDB.db;";
+
         public User LogedInUser { get; set; } //after login in / logging out change this user value, will be tracked on all forms.
         public List<User> Users { get; set; }
         public List<News> NewsArticles { get; set; }
@@ -53,21 +57,172 @@ namespace GamingDashboard
 
         public User CreateUser(string username, string password, string email, string FirstName, string LastName)
         {
-            return new User(); // Placeholder return
+            User user = new User();
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string checkUserName = "SELECT * FROM Users where Username = @username";
+
+                using (SQLiteCommand command = new SQLiteCommand(checkUserName, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return null;
+                        }
+
+                    }
+                }
+
+                // if there is no username present procced
+                string insertUser = "INSERT INTO Users(username, password,email, firstName, lastName) VALUES (@username, @password, @email, @firstName, @lastName) ";
+
+                using (SQLiteCommand command = new SQLiteCommand(insertUser, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@password", password);
+                    command.Parameters.AddWithValue("@email", email);
+                    command.Parameters.AddWithValue("@firstName", FirstName);
+                    command.Parameters.AddWithValue("@lastName", LastName);
+
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        // User creation successful; return true.
+                        user = GetUserByUsername(username);
+
+                    }
+                }
+            }
+            return user;
+
         }
 
         public User GetUserById(int userId)
         {
-            return new User(); // Placeholder return
+            return null; // Placeholder return
+        }
+        public User GetUserByUsername(string username)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string query = "select * from users where username = @username";
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+
+
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            // return a user object instead of true or false
+                            User user = new User
+                            {
+                                //UserId = int.Parse(reader["UserId"].ToString()), // Assuming UserId is an int
+
+                                UserFirstName = reader["FirstName"].ToString(),
+                                UserLastName = reader["LastName"].ToString(),
+                                UserEmail = reader["Email"].ToString(),
+                                Username = reader["Username"].ToString(),
+                                Password = reader["password"].ToString()
+                            };
+                            return user;
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         public User Login(string username, string password)
         {
-            return new User(); // Placeholder return
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string query = "select * from users where username = @username AND Password = @password";
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@password", password);
+
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            // return a user object instead of true or false
+                            User user = new User
+                            {
+                                UserId = int.Parse(reader["UserId"].ToString()), // Assuming UserId is an int
+
+                                UserFirstName = reader["FirstName"].ToString(),
+                                UserLastName = reader["LastName"].ToString(),
+                                UserEmail = reader["Email"].ToString(),
+                                Username = reader["Username"].ToString(),
+                                Password = reader["password"].ToString()
+                            };
+                            return user;
+                        }
+                    }
+                }
+            }
+            return null;
+
         }
 
-        public void Update(string username, string password, string email, string FirstName, string LastName)
+        public string Update(int userId, string username, string password, string email, string FirstName, string LastName)
         {
+
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string checkUserName = "SELECT * FROM Users WHERE Username = @username AND userId != @userId";
+
+                using (SQLiteCommand checkCommand = new SQLiteCommand(checkUserName, connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@username", username);
+                    checkCommand.Parameters.AddWithValue("@userId", userId);
+
+                    using (SQLiteDataReader reader = checkCommand.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            return "Sorry! Username is already in use by another user!"; // Username is already in use by another user.
+                        }
+                    }
+                }
+
+                string updateUser = "UPDATE Users SET Username = @username, Password = @password, Email = @email, FirstName = @firstName, LastName = @lastName WHERE userId = @userId";
+
+                using (SQLiteCommand updateCommand = new SQLiteCommand(updateUser, connection))
+                {
+                    updateCommand.Parameters.AddWithValue("@username", username);
+                    updateCommand.Parameters.AddWithValue("@password", password);
+                    updateCommand.Parameters.AddWithValue("@email", email);
+                    updateCommand.Parameters.AddWithValue("@firstName", FirstName);
+                    updateCommand.Parameters.AddWithValue("@lastName", LastName);
+                    updateCommand.Parameters.AddWithValue("@userId", userId);
+
+                    int rowsAffected = updateCommand.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        return "User information updated successfully"; // User information updated successfully.
+                    }
+                    else
+                    {
+                        return "Couldn't update user details!";
+
+                    }
+                }
+            }
+
 
         }
 
@@ -112,11 +267,11 @@ namespace GamingDashboard
         {
             string locale = "us";
             string country = "us";
-            if(searchWords.Length == 0)
+            if (searchWords.Length == 0)
             {
                 searchWords = " "; //the api seems to reply with the top list of elements if a space is parsed as the search word. null entry will respond with 404. 
             }
-            if(categories.Length == 0)
+            if (categories.Length == 0)
             {
                 categories = "Games"; //default back to games.
             }
@@ -149,11 +304,11 @@ namespace GamingDashboard
             string locale = "us";
             string country = "us";
 
-            if(searchWords == null)
+            if (searchWords == null)
             {
                 searchWords = " "; //the api seems to reply with the top list of elements if a space is parsed as the search word. null entry will respond with 404. 
             }
-            if ( categories == null)
+            if (categories == null)
             {
                 categories = "Games"; //default back to games.
             }
@@ -170,7 +325,7 @@ namespace GamingDashboard
                 request.Headers.Add("X-RapidAPI-Key", RapidApiKey);  //the request headers are attached, these are required by rapid API. 
                 request.Headers.Add("X-RapidAPI-Host", EpicRapidApiHost);
 
-                using( var response = await client.SendAsync(request))
+                using (var response = await client.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     var responseContent = await response.Content.ReadAsStringAsync();
@@ -183,7 +338,7 @@ namespace GamingDashboard
 
         public List<EpicSpecial> FilterEpicSalesByCategory(string category)
         {
-            return new List<EpicSpecial>(); 
+            return new List<EpicSpecial>();
         }
 
 
@@ -315,7 +470,7 @@ namespace GamingDashboard
 
         public List<News> GetNewsArticles()
         {
-            return new List<News>(); 
+            return new List<News>();
         }
 
         public List<News> SearchNews(string keyword)
@@ -325,7 +480,7 @@ namespace GamingDashboard
 
         public List<News> FilterNewsByCategory(string category)
         {
-            return new List<News>(); 
+            return new List<News>();
         }
 
         ///////////////////////////////////////////////////////////////////////////////////
@@ -341,23 +496,134 @@ namespace GamingDashboard
 
         public List<News> GetNewsFavorites(int userId)
         {
-            return new List<News>(); 
+            return new List<News>();
         }
 
-        public void AddSteamSaleFavorite(int userId, int saleId)
+        public void AddEpicFavorite(User user, EpicSpecial epic)
         {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // Check if the EpicSpecial is already in the user's favorites
+                using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                    checkCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count == 0)
+                    {
+                        // If the EpicSpecial is not in the user's favorites, add it
+                        using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO EpicFavourites (UserId, EpicId, Title, Price, imageURL) VALUES (@UserId, @EpicId, @Title, @Price, @imageURL)", connection))
+                        {
+                            insertCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                            insertCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                            insertCommand.Parameters.AddWithValue("@Title", epic.Title);
+                            insertCommand.Parameters.AddWithValue("@Price", (int)epic.CurrentPrice);
+                            insertCommand.Parameters.AddWithValue("@imageURL", epic.KeyImages.FirstOrDefault()?.Url);
+                            insertCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
+
         }
 
-        public void RemoveSteamSaleFavorite(int userId, int saleId)
+        public bool isEpicAlreadyAdded(User user, EpicSpecial epic)
         {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // Check if the EpicSpecial is already in the user's favorites
+                using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                    checkCommand.Parameters.AddWithValue("@EpicId", epic.Id);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count == 0)
+                    {
+                        connection.Close();
+                        return false;
+                    }
+                    else
+                    {
+                        connection.Close();
+                        return true;
+                    }
+                }
+            }
+
         }
 
-        public List<EpicSpecial> GetSteamSaleFavorites(int userId)
+        public void RemoveEpicFavorite(User user, string epicId)
         {
-            return new List<EpicSpecial>(); 
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // Check if the EpicSpecial is in the user's favorites
+                using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                    checkCommand.Parameters.AddWithValue("@EpicId", epicId);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        // If the EpicSpecial is in the user's favorites, delete it
+                        using (SQLiteCommand deleteCommand = new SQLiteCommand("DELETE FROM EpicFavourites WHERE UserId = @UserId AND EpicId = @EpicId", connection))
+                        {
+                            deleteCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                            deleteCommand.Parameters.AddWithValue("@EpicId", epicId);
+                            deleteCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
         }
 
+        public List<EpicFavourite> GetFavorites(User user)
+        {
+            List<EpicFavourite> favorites = new List<EpicFavourite>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand getFaves = new SQLiteCommand("SELECT * FROM EPICFAVOURITES WHERE USERID = @UserId"))
+                {
+                    getFaves.Parameters.AddWithValue("@UserId", user.UserId);
+                    getFaves.Connection = connection;
+                    using (SQLiteDataReader reader = getFaves.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            EpicFavourite favorite = new EpicFavourite
+                            {
+                                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                                EpicId = reader.GetString(reader.GetOrdinal("EpicId")),
+                                Title = reader.GetString(reader.GetOrdinal("Title")),
+                                Price = reader.GetInt32(reader.GetOrdinal("Price")),
+                                imageUrl = reader.GetString(reader.GetOrdinal("imageURL"))
+                            };
+
+                            favorites.Add(favorite);
+                        }
+                    }
+                }
+            }
+
+            return favorites;
+        }
+
+
+
+        //Literally all database methods can go here, just make sure they are all grouped in order according to the order of the lists. 
     }
-
-    //Literally all database methods can go here, just make sure they are all grouped in order according to the order of the lists. 
 }
