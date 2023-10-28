@@ -21,72 +21,54 @@ namespace GamingDashboard
         public string searchBar = ""; //api call for searchwords
         public string category = ""; //API call for category
         private Button current = null; //Tracks the current category button to make it blue.
-        List<EpicSpecial> epicSpecials;
         public EpicSpecialExclusive(Database db)
         {
             InitializeComponent();
             this.db = db;
-
-            this.StartPosition = FormStartPosition.CenterScreen;
-            Console.WriteLine(db.LogedInUser.Username);
-
         }
 
         private async void EpicSpecialExclusive_Load(object sender, EventArgs e)
         {
             setButtons();
-            UserNameLbl.Text = db.LogedInUser.Username; //set the username logo
             if (current != null)
             {
                 current.BackColor = Color.Blue;
             }
-            try
-            { //trys to find a list of epic specials based on the category and search words.
-                epicSpecials = await db.SearchEpicSales(searchBar, category);
-                //Converts the lengthy epic specials into much more paletable display helper datasources. 
-                List<epicDisplayHelper> gridView = epicSpecials.Select(epicSpecial => new epicDisplayHelper
-                {
-                    Title = epicSpecial.Title,
-                    Price = priceFormatter(epicSpecial.CurrentPrice),
-                }).ToList();
 
-                //debug
-                foreach (EpicSpecial epic in epicSpecials)
-                {
-                    Console.WriteLine(epic.Title);
-                }
+            List<EpicSpecial> epicSpecials = await db.SearchEpicSales(searchBar, category);
 
-                dataGridView1.Columns.Clear();
-                dataGridView1.DataSource = null;
-
-                dataGridView1.DataSource = gridView;
-                //Loads the images from the provided API urls, into smaller images, this is an asynchronous task. 
-                Load_Images(epicSpecials);
-
-                DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
-                imageColumn.Name = "ImageColumn";
-
-                imageColumn.Name = "ImageColumn";
-                imageColumn.Width = 128; // Set the width for the desired aspect ratio
-                dataGridView1.Columns.Add(imageColumn);
-                dataGridView1.Columns[0].Width = 440;
-                dataGridView1.Columns[2].Width = imageScale;
-
-                // Adjust row height to 128 pixels
-
-                //Asynchronous call for images from the API, can be a little slow but atleast it does not crash the application untill complete
-
-                dataGridView1.Refresh();
-            }
-            catch (Exception ex)
+            List<epicDisplayHelper> gridView = epicSpecials.Select(epicSpecial => new epicDisplayHelper
             {
-                //Catches null return exception from the API and clears the display port.
-                List<EpicSpecial> epicSpecials;
-                dataGridView1.Columns.Clear();
-                dataGridView1.Refresh();
+                Title = epicSpecial.Title,
+                Price = priceFormatter( epicSpecial.CurrentPrice),
+            }).ToList();
+
+            foreach (EpicSpecial epic in epicSpecials)
+            {
+                Console.WriteLine(epic.Title);
             }
 
+            dataGridView1.Columns.Clear();
+            dataGridView1.DataSource = null;
 
+            dataGridView1.DataSource = gridView;
+
+            Load_Images(epicSpecials);
+
+            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
+            imageColumn.Name = "ImageColumn";
+
+            imageColumn.Name = "ImageColumn";
+            imageColumn.Width = 128; // Set the width for the desired aspect ratio
+            dataGridView1.Columns.Add(imageColumn);
+            dataGridView1.Columns[0].Width = 400;
+            dataGridView1.Columns[2].Width = imageScale;
+
+            // Adjust row height to 128 pixels
+
+            //Asynchronous call for images from the API, can be a little slow but atleast it does not crash the application untill complete
+
+            dataGridView1.Refresh();
 
         }
 
@@ -139,6 +121,10 @@ namespace GamingDashboard
             }
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -192,40 +178,12 @@ namespace GamingDashboard
 
         }
 
-        private void ReturnBtn_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
             //Need a form manager class to manage all forms. Coming soon.
-            //IGNReviewExclusive newsExclusiveForm = new IGNReviewExclusive(db);
+            IGNReviewExclusive newsExclusiveForm = new IGNReviewExclusive(db);
             //this.Close();
-            
-            //newsExclusiveForm.Show(new IGNReviewExclusive(db)); we will link these later in the application
-            //Return the user to the main menu 
-            MainPage main = new MainPage(db);
-            main.Show();
-            this.Dispose();
-        }
-
-        private void UserNameLbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            Console.WriteLine( epicSpecials[e.RowIndex].Title);
-            EpicSpecialDetails epicView = new EpicSpecialDetails(db, epicSpecials[e.RowIndex]);
-            epicView.Show();
-            this.Dispose();
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            newsExclusiveForm.Show(new IGNReviewExclusive(db));
         }
     }
 
