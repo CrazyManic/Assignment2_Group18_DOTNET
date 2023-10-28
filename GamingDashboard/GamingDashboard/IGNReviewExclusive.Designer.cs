@@ -115,6 +115,17 @@ namespace GamingDashboard
             button1.UseVisualStyleBackColor = true;
             button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button3
+            // 
+            button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            button3.Location = new System.Drawing.Point(8, 429);
+            button3.Name = "button3";
+            button3.Size = new System.Drawing.Size(152, 36);
+            button3.TabIndex = 11;
+            button3.Text = "Return";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -126,7 +137,7 @@ namespace GamingDashboard
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label4.Location = new System.Drawing.Point(2, 115);
@@ -147,20 +158,9 @@ namespace GamingDashboard
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
-            // 
-            button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            button3.Location = new System.Drawing.Point(8, 429);
-            button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(152, 36);
-            button3.TabIndex = 11;
-            button3.Text = "Return";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // IGNReviewExclusive
             // 
-            this.BackgroundImage = global::GamingDashboard.Properties.Resources.pattern;
+            this.BackgroundImage = global::GamingDashboard.Properties.Resources.cool_background;
             this.ClientSize = new System.Drawing.Size(909, 477);
             this.Controls.Add(button3);
             this.Controls.Add(this.button2);
@@ -192,13 +192,13 @@ namespace GamingDashboard
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
-
 
         private System.Windows.Forms.Label UserNameLbl;
     }

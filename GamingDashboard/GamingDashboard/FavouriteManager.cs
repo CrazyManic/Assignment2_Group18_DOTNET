@@ -35,7 +35,7 @@ namespace GamingDashboard
 
         private void FavouriteManager_Load(object sender, EventArgs e)
         {
-            myFaves = database.GetFavorites(database.LogedInUser);
+            myFaves = database.GetEpicFavorites(database.LogedInUser);
 
             dataGridView1.Columns.Clear();
             dataGridView1.DataSource = null;
@@ -88,7 +88,7 @@ namespace GamingDashboard
                 currentSelection = null;
 
                 // Update the data source for the dataGridView
-                myFaves = database.GetFavorites(database.LogedInUser);
+                myFaves = database.GetEpicFavorites(database.LogedInUser);
                 List<epicFaveHelper> gridView = myFaves.Select(EpicFavourite => new epicFaveHelper
                 {
                     Title = EpicFavourite.Title,

@@ -8,6 +8,7 @@ namespace GamingDashboard
 {
     public class IGNReview
     {
+        public string Id { get; set; }
         public List<PublishDate> publishDate { get; set; }
         public string Article {  get; set; }
         public string Image { get; set; }

@@ -563,7 +563,7 @@ namespace GamingDashboard
             }
         }
 
-        public List<EpicFavourite> GetFavorites(User user)
+        public List<EpicFavourite> GetEpicFavorites(User user)
         {
             List<EpicFavourite> favorites = new List<EpicFavourite>();
 
@@ -596,6 +596,129 @@ namespace GamingDashboard
             return favorites;
         }
 
+        public List<IGNFavourite> GetIGNFavorites(User user)
+        {
+            List<IGNFavourite> favorites = new List<IGNFavourite>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand getFaves = new SQLiteCommand("SELECT * FROM IGNFAVOURITES WHERE USERID = @UserId"))
+                {
+                    getFaves.Parameters.AddWithValue("@UserId", user.UserId);
+                    getFaves.Connection = connection;
+                    using (SQLiteDataReader reader = getFaves.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            IGNFavourite favorite = new IGNFavourite 
+                            {
+                                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                                IGNId = reader.GetString(reader.GetOrdinal("IGNId")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                Score = reader.GetDouble(reader.GetOrdinal("Score")),
+                                imageUrl = reader.GetString(reader.GetOrdinal("imageURL"))
+                            };
+
+                            favorites.Add(favorite);
+                        }
+                    }
+                }
+            }
+
+            return favorites;
+        }
+
+        public void AddIGNFavorite(User user, IGNReview ign)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // Check if the EpicSpecial is already in the user's favorites
+                using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM IGNFavourites WHERE UserId = @UserId AND IGNId = @IGNId", connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                    checkCommand.Parameters.AddWithValue("@IGNId", ign.Id);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count == 0)
+                    {
+                        // If the EpicSpecial is not in the user's favorites, add it
+                        using (SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO IGNFavourites (UserId, IGNId, Name, Score, imageURL) VALUES (@UserId, @IGNId, @Name, @Score, @imageURL)", connection))
+                        {
+                            insertCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                            insertCommand.Parameters.AddWithValue("@IGNId", ign.Id);
+                            insertCommand.Parameters.AddWithValue("@Name", ign.Name);
+                            insertCommand.Parameters.AddWithValue("@Score", ign.Score);
+                            insertCommand.Parameters.AddWithValue("@imageURL", ign.Image);
+                            insertCommand.ExecuteNonQuery();
+                            insertCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
+
+        }
+
+        public bool isIGNAlreadyAdded(User user, IGNReview ign)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // Check if the EpicSpecial is already in the user's favorites
+                using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM IGNFavourites WHERE UserId = @UserId AND IGNId = @IGNId", connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                    checkCommand.Parameters.AddWithValue("@IGNId", ign.Id);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count == 0)
+                    {
+                        connection.Close();
+                        return false;
+                    }
+                    else
+                    {
+                        connection.Close();
+                        return true;
+                    }
+                }
+            }
+
+        }
+
+        public void RemoveIGNFavorite(User user, string ignId)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                // Check if the EpicSpecial is in the user's favorites
+                using (SQLiteCommand checkCommand = new SQLiteCommand("SELECT COUNT(*) FROM IGNFavourites WHERE UserId = @UserId AND IGNId = @IgnId", connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                    checkCommand.Parameters.AddWithValue("@IGNId", ignId);
+                    int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        // If the EpicSpecial is in the user's favorites, delete it
+                        using (SQLiteCommand deleteCommand = new SQLiteCommand("DELETE FROM IGNFavourites WHERE UserId = @UserId AND IGNId = @IGNId", connection))
+                        {
+                            deleteCommand.Parameters.AddWithValue("@UserId", user.UserId);
+                            deleteCommand.Parameters.AddWithValue("@IGNId", ignId);
+                            deleteCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
+        }
 
 
         //Literally all database methods can go here, just make sure they are all grouped in order according to the order of the lists. 

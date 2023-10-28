@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IGNFavourite.cs" />
     <Compile Include="EpicFavourite.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Dashboard.cs">
@@ -94,6 +95,12 @@
     </Compile>
     <Compile Include="ComingSoon.Designer.cs">
       <DependentUpon>ComingSoon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IGNSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IGNSearch.Designer.cs">
+      <DependentUpon>IGNSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="IGNReview.cs" />
     <Compile Include="IGNReviewExclusive.cs">
@@ -163,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IGNReviewExclusive.resx">
       <DependentUpon>IGNReviewExclusive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IGNSearch.resx">
+      <DependentUpon>IGNSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
