@@ -76,5 +76,15 @@ namespace GamingDashboard
             IGNReviewExclusive newsExclusiveForm = new IGNReviewExclusive(database);
             newsExclusiveForm.Show(new IGNReviewExclusive(database));
         }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            Login login = new Login(database);
+            MessageBox.Show("See you again!", "Logging out", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            login.Show();
+            database.LogedInUser = null;
+
+            this.Dispose();
+        }
     }
 }
