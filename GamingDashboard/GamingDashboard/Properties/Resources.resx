@@ -121,14 +121,20 @@
   <data name="cool-background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cool-background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cool-background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cool-background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Video-Game-Controller-Logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Video-Game-Controller-Logo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="favourite_14390" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\favourite_14390.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Video-Game-Controller-Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Video-Game-Controller-Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pattern1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pattern1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Searching" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Searching.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Heart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Heart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,13 +142,13 @@
   <data name="pattern" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pattern.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Video-Game-Controller-Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Video-Game-Controller-Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cool-background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cool-background1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Space BG image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Space BG image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Video-Game-Controller-Logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Video-Game-Controller-Logo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ComingSoon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ComingSoon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

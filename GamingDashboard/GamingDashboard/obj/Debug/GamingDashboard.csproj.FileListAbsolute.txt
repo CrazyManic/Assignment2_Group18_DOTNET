@@ -107,3 +107,6 @@ C:\UTS_Local\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debu
 C:\UTS_Local\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.csproj.CopyComplete
 C:\UTS_Local\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.exe
 C:\UTS_Local\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.pdb
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.IGNReviewExclusive.resources
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.IGNSearch.resources
+C:\Users\User\Desktop\Assignment2_Group18_DOTNET\GamingDashboard\GamingDashboard\obj\Debug\GamingDashboard.NewsExclusive.resources

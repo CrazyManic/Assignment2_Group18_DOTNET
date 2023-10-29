@@ -240,6 +240,12 @@
   <ItemGroup>
     <None Include="Resources\Video-Game-Controller-Logo1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Searching.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ComingSoon.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

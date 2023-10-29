@@ -29,58 +29,95 @@ namespace GamingDashboard
         /// </summary>
         private void InitializeComponent()
         {
-            this.EpicSalesBtn = new System.Windows.Forms.Button();
-            this.ReviewsBtn = new System.Windows.Forms.Button();
-            this.ComingSoonBtn = new System.Windows.Forms.Button();
             this.MyFavouritesBtn = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.UserNameLbl = new System.Windows.Forms.Label();
             this.ManageAccountBtn = new System.Windows.Forms.Button();
+            this.ComingSoonBtn = new System.Windows.Forms.Button();
+            this.EpicSalesBtn = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
-            // EpicSalesBtn
+            // MyFavouritesBtn
             // 
-            this.EpicSalesBtn.Location = new System.Drawing.Point(85, 154);
-            this.EpicSalesBtn.Name = "EpicSalesBtn";
-            this.EpicSalesBtn.Size = new System.Drawing.Size(219, 257);
-            this.EpicSalesBtn.TabIndex = 0;
-            this.EpicSalesBtn.Text = "EPIC Sales";
-            this.EpicSalesBtn.UseVisualStyleBackColor = true;
-            this.EpicSalesBtn.Click += new System.EventHandler(this.EpicSalesBtn_Click);
+            this.MyFavouritesBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.MyFavouritesBtn.BackgroundImage = global::GamingDashboard.Properties.Resources.favourite_14390;
+            this.MyFavouritesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.MyFavouritesBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MyFavouritesBtn.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.MyFavouritesBtn.Location = new System.Drawing.Point(587, 247);
+            this.MyFavouritesBtn.Name = "MyFavouritesBtn";
+            this.MyFavouritesBtn.Size = new System.Drawing.Size(210, 67);
+            this.MyFavouritesBtn.TabIndex = 3;
+            this.MyFavouritesBtn.Text = "My Favourites";
+            this.MyFavouritesBtn.UseVisualStyleBackColor = false;
+            this.MyFavouritesBtn.Click += new System.EventHandler(this.MyFavouritesBtn_Click);
             // 
-            // ReviewsBtn
+            // label1
             // 
-            this.ReviewsBtn.Location = new System.Drawing.Point(310, 154);
-            this.ReviewsBtn.Name = "ReviewsBtn";
-            this.ReviewsBtn.Size = new System.Drawing.Size(262, 81);
-            this.ReviewsBtn.TabIndex = 1;
-            this.ReviewsBtn.Text = "Reviews";
-            this.ReviewsBtn.UseVisualStyleBackColor = true;
-            this.ReviewsBtn.Click += new System.EventHandler(this.ReviewsBtn_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(171, 37);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(424, 73);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Dash Gaming";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // UserNameLbl
+            // 
+            this.UserNameLbl.AutoSize = true;
+            this.UserNameLbl.BackColor = System.Drawing.Color.Transparent;
+            this.UserNameLbl.Font = new System.Drawing.Font("Niagara Engraved", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserNameLbl.ForeColor = System.Drawing.Color.Transparent;
+            this.UserNameLbl.Location = new System.Drawing.Point(652, 63);
+            this.UserNameLbl.Name = "UserNameLbl";
+            this.UserNameLbl.Size = new System.Drawing.Size(73, 40);
+            this.UserNameLbl.TabIndex = 7;
+            this.UserNameLbl.Text = "label2";
+            this.UserNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.UserNameLbl.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // ManageAccountBtn
+            // 
+            this.ManageAccountBtn.Location = new System.Drawing.Point(612, 145);
+            this.ManageAccountBtn.Name = "ManageAccountBtn";
+            this.ManageAccountBtn.Size = new System.Drawing.Size(165, 34);
+            this.ManageAccountBtn.TabIndex = 8;
+            this.ManageAccountBtn.Text = "ManageAccount";
+            this.ManageAccountBtn.UseVisualStyleBackColor = true;
+            this.ManageAccountBtn.Click += new System.EventHandler(this.ManageAccountBtn_Click);
             // 
             // ComingSoonBtn
             // 
-            this.ComingSoonBtn.Location = new System.Drawing.Point(310, 241);
+            this.ComingSoonBtn.BackgroundImage = global::GamingDashboard.Properties.Resources.ComingSoon;
+            this.ComingSoonBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ComingSoonBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComingSoonBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.ComingSoonBtn.Location = new System.Drawing.Point(335, 195);
             this.ComingSoonBtn.Name = "ComingSoonBtn";
-            this.ComingSoonBtn.Size = new System.Drawing.Size(262, 82);
+            this.ComingSoonBtn.Size = new System.Drawing.Size(237, 170);
             this.ComingSoonBtn.TabIndex = 2;
             this.ComingSoonBtn.Text = "Coming Soon";
             this.ComingSoonBtn.UseVisualStyleBackColor = true;
             this.ComingSoonBtn.Click += new System.EventHandler(this.ComingSoonBtn_Click);
             // 
-            // MyFavouritesBtn
+            // EpicSalesBtn
             // 
-            this.MyFavouritesBtn.Location = new System.Drawing.Point(310, 329);
-            this.MyFavouritesBtn.Name = "MyFavouritesBtn";
-            this.MyFavouritesBtn.Size = new System.Drawing.Size(262, 82);
-            this.MyFavouritesBtn.TabIndex = 3;
-            this.MyFavouritesBtn.Text = "My Favourites";
-            this.MyFavouritesBtn.UseVisualStyleBackColor = true;
-            this.MyFavouritesBtn.Click += new System.EventHandler(this.MyFavouritesBtn_Click);
+            this.EpicSalesBtn.BackgroundImage = global::GamingDashboard.Properties.Resources.Searching;
+            this.EpicSalesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.EpicSalesBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EpicSalesBtn.ForeColor = System.Drawing.Color.White;
+            this.EpicSalesBtn.Location = new System.Drawing.Point(84, 195);
+            this.EpicSalesBtn.Name = "EpicSalesBtn";
+            this.EpicSalesBtn.Size = new System.Drawing.Size(245, 170);
+            this.EpicSalesBtn.TabIndex = 0;
+            this.EpicSalesBtn.Text = "EPIC Sales";
+            this.EpicSalesBtn.UseVisualStyleBackColor = true;
+            this.EpicSalesBtn.Click += new System.EventHandler(this.EpicSalesBtn_Click);
             // 
             // pictureBox1
             // 
@@ -92,51 +129,16 @@ namespace GamingDashboard
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(184, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(424, 73);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Dash Gaming";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::GamingDashboard.Properties.Resources.pattern;
-            this.pictureBox2.Location = new System.Drawing.Point(578, 86);
+            this.pictureBox2.Location = new System.Drawing.Point(587, -46);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(210, 252);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // UserNameLbl
-            // 
-            this.UserNameLbl.AutoSize = true;
-            this.UserNameLbl.BackColor = System.Drawing.Color.Transparent;
-            this.UserNameLbl.Font = new System.Drawing.Font("Niagara Engraved", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserNameLbl.ForeColor = System.Drawing.Color.Transparent;
-            this.UserNameLbl.Location = new System.Drawing.Point(643, 195);
-            this.UserNameLbl.Name = "UserNameLbl";
-            this.UserNameLbl.Size = new System.Drawing.Size(73, 40);
-            this.UserNameLbl.TabIndex = 7;
-            this.UserNameLbl.Text = "label2";
-            this.UserNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.UserNameLbl.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // ManageAccountBtn
-            // 
-            this.ManageAccountBtn.Location = new System.Drawing.Point(598, 279);
-            this.ManageAccountBtn.Name = "ManageAccountBtn";
-            this.ManageAccountBtn.Size = new System.Drawing.Size(165, 34);
-            this.ManageAccountBtn.TabIndex = 8;
-            this.ManageAccountBtn.Text = "ManageAccount";
-            this.ManageAccountBtn.UseVisualStyleBackColor = true;
-            this.ManageAccountBtn.Click += new System.EventHandler(this.ManageAccountBtn_Click);
             // 
             // MainPage
             // 
@@ -145,14 +147,13 @@ namespace GamingDashboard
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.ManageAccountBtn);
+            this.Controls.Add(this.UserNameLbl);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MyFavouritesBtn);
             this.Controls.Add(this.ComingSoonBtn);
-            this.Controls.Add(this.ReviewsBtn);
             this.Controls.Add(this.EpicSalesBtn);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.UserNameLbl);
-            this.Controls.Add(this.pictureBox2);
             this.Name = "MainPage";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainPage_Load);
@@ -166,7 +167,6 @@ namespace GamingDashboard
         #endregion
 
         private System.Windows.Forms.Button EpicSalesBtn;
-        private System.Windows.Forms.Button ReviewsBtn;
         private System.Windows.Forms.Button ComingSoonBtn;
         private System.Windows.Forms.Button MyFavouritesBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
